@@ -106,6 +106,7 @@ export enum AuthState {
   disclaimer,
   ready,
   about,
+  AddFrom
 }
 
 export enum BiometricsState {

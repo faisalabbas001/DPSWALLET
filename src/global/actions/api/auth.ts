@@ -249,6 +249,10 @@ addActionHandler('afterCreateBiometrics', async (global, actions) => {
 });
 
 
+addActionHandler('skipCreateBiometrics', (global) => {
+  global = updateAuth(global, { state: AuthState.createPassword });
+  setGlobal(global);
+});
 
 
 

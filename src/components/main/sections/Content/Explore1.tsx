@@ -51,6 +51,7 @@ function Explore({
     loadExploreSites,
     getDapps,
     addSiteToBrowserHistory,
+    skipCreateBiometrics,
     removeSiteFromBrowserHistory,
   } = getActions();
 
@@ -196,6 +197,14 @@ function Explore({
     }
   };
 
+
+
+  const handleClick=()=>{
+    location.reload()
+  }
+
+
+
   const handleMenuClose = useLastCallback(() => {
     inputRef.current?.blur();
   });
@@ -319,6 +328,9 @@ function Explore({
       <h1 className={styles1 .heading}>Profile Details</h1>
       <form className={styles1 .form} onSubmit={validateAndSubmit}>
         
+  
+
+
        
         <input
           type="text"
@@ -377,11 +389,16 @@ function Explore({
           onChange={handleChange1}
           className={`${styles1 .input} ${errors.email ? styles1 .error : ''}`}
         />
+      
         {errors.email && <span className={styles1 .errorMessage}>{errors.email}</span>}
         <button type="submit" className={styles1 .submitButton}>
           Submit
         </button>
+       
       </form>
+      <button className={styles1.cancel}  onClick={handleClick}>
+          Cancel
+        </button>
     </div>
 
 
