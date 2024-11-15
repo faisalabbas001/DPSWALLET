@@ -158,7 +158,7 @@ function SettingsAssets({
         ref={scrollContainerRef}
       >
         <div className={styles.settingsBlock}>
-          <Dropdown
+          {/* <Dropdown
             label={lang('Base Currency')}
             items={CURRENCY_LIST}
             selectedValue={baseCurrency ?? DEFAULT_PRICE_CURRENCY}
@@ -167,9 +167,9 @@ function SettingsAssets({
             className={buildClassName(styles.item, styles.item_small)}
             onChange={handleBaseCurrencyChange}
             isLoading={localBaseCurrency !== baseCurrency}
-          />
-          <div className={buildClassName(styles.item, styles.item_small)} onClick={handleInvestorViewToggle}>
-            <div className={styles.blockWithTooltip}>
+          /> */}
+          {/* <div className={buildClassName(styles.item, styles.item_small)} onClick={handleInvestorViewToggle}> */}
+            {/* <div className={styles.blockWithTooltip}>
               {lang('Investor View')}
 
               <IconWithTooltip
@@ -178,14 +178,14 @@ function SettingsAssets({
                 iconClassName={styles.iconQuestion}
               />
 
-            </div>
+            </div> */}
 
-            <Switcher
+            {/* <Switcher
               className={styles.menuSwitcher}
               label={lang('Investor View')}
               checked={isInvestorViewEnabled}
-            />
-          </div>
+            /> */}
+          {/* </div> */}
           <div className={buildClassName(styles.item, styles.item_small)} onClick={handleTinyTransfersHiddenToggle}>
             <div className={styles.blockWithTooltip}>
               {lang('Hide Tiny Transfers')}

@@ -7,7 +7,6 @@ import type { DropdownItem } from '../ui/Dropdown';
 import { TONCOIN } from '../../config';
 import renderText from '../../global/helpers/renderText';
 import { selectAccount, selectCurrentAccountTokens } from '../../global/selectors';
-import { fromDecimal, toDecimal } from '../../util/decimals';
 import formatTransferUrl from '../../util/ton/formatTransferUrl';
 import { ASSET_LOGO_PATHS } from '../ui/helpers/assetLogos';
 
@@ -37,12 +36,13 @@ function InvoiceModal({
 
   const lang = useLang();
 
-  const [amount, setAmount] = useState<bigint | undefined>(undefined);
+  // State for raw user input
+  const [rawAmount, setRawAmount] = useState<string>(''); 
   const [comment, setComment] = useState<string>('');
   const [hasAmountError, setHasAmountError] = useState<boolean>(false);
 
-  const invoiceUrl = address ? formatTransferUrl(address, amount, comment) : '';
-  const decimals = TONCOIN.decimals; // TODO Change it after token selection is supported
+  // Generate the invoice URL directly from the input value
+  const invoiceUrl = address ? formatTransferUrl(address, rawAmount || undefined, comment) : '';
 
   const dropdownItems = useMemo(() => {
     if (!tokens) {
@@ -62,22 +62,22 @@ function InvoiceModal({
     }, []);
   }, [tokens]);
 
+  // Handle the raw input
   const handleAmountInput = useLastCallback((stringValue?: string) => {
     setHasAmountError(false);
 
     if (!stringValue) {
-      setAmount(undefined);
+      setRawAmount('');
       return;
     }
 
-    const value = fromDecimal(stringValue, decimals);
-
-    if (value < 0) {
+    // Validate to ensure it's a positive number
+    if (!/^\d*(\.\d{0,6})?$/.test(stringValue)) { // Allows up to 6 decimal places
       setHasAmountError(true);
       return;
     }
 
-    setAmount(value);
+    setRawAmount(stringValue); // Store the raw input as-is
   });
 
   function renderTokens() {
@@ -100,7 +100,7 @@ function InvoiceModal({
         key="amount"
         id="amount"
         hasError={hasAmountError}
-        value={amount === undefined ? undefined : toDecimal(amount)}
+        value={rawAmount} // Display raw input value
         labelText={lang('Amount')}
         onChange={handleAmountInput}
       >
@@ -118,7 +118,7 @@ function InvoiceModal({
         {lang('Share this URL to receive TON')}
       </p>
       <InteractiveTextField
-        text={invoiceUrl}
+        text={invoiceUrl} // Pass raw input value directly in the URL
         copyNotification={lang('Invoice link was copied!')}
         className={styles.invoiceLinkField}
       />

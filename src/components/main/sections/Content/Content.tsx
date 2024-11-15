@@ -150,7 +150,7 @@ function Content({
           : []
       ),
       { id: ContentTab.Activity, title: lang('Activity'), className: styles.tab },
-      { id: ContentTab.Referral, title: lang('Referral'), className: styles.tab },
+      { id: ContentTab.Tasks, title: lang('Tasks'), className: styles.tab },
       { id: ContentTab.P2p, title: lang('P2P'), className: styles.tab },
 
     
@@ -307,7 +307,7 @@ function Content({
         
     
 
-      case ContentTab.Referral:
+      case ContentTab.Tasks:
         return <Explore isActive={isActive} />;
 
     

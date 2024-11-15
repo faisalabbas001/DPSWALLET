@@ -144,7 +144,7 @@ function Card({
               tabIndex={0}
               onClick={openCurrencyMenu}
             >  
-                  
+               
 
               {shortBaseSymbol.length === 1 && shortBaseSymbol}
               <AnimatedCounter isDisabled={noAnimationCounter} text={primaryWholePart ?? ''} />
@@ -161,6 +161,8 @@ function Card({
               <i className={iconCaretClassNames} aria-hidden />
             </span>
           </div>
+
+ 
         </Transition>
         <CurrencySwitcher isOpen={isCurrencyMenuOpen} onClose={closeCurrencyMenu} />
         {primaryValue !== '0' && (

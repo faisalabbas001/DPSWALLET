@@ -1,24 +1,20 @@
 .container {
   user-select: none;
-
   z-index: 1;
-
   overflow: auto;
   display: flex;
   flex-shrink: 0;
   flex-wrap: nowrap;
   align-items: flex-end;
   justify-content: space-between;
-
   padding: 0 1rem;
-
   font-size: 0.9375rem;
   font-weight: 500;
 
-  background-color: var(--color-background-first);
+  /* Updated background with gradient */
+  background: linear-gradient(135deg, #FF2BFF, #00CFFF);
 
   scrollbar-color: rgba(0, 0, 0, 0);
-
   scrollbar-width: none;
 
   &::-webkit-scrollbar {
@@ -27,10 +23,11 @@
 
   &::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0);
-    // `box-shadow` prevents repaint on macOS when hovering out of scrollable container
+    /* Prevent repaint on macOS when hovering out of scrollable container */
     box-shadow: 0 0 1px rgba(255, 255, 255, 0.01);
   }
 }
+
 
 .withBorder {
   position: relative;

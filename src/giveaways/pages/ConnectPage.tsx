@@ -13,6 +13,7 @@ interface OwnProps {
   giveaway: Giveaway;
 }
 
+
 function ConnectPage({ onConnectClick, giveaway }: OwnProps) {
   return (
     <CommonPage onConnectClick={onConnectClick}>

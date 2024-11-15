@@ -47,6 +47,8 @@ import Transaction from './Transaction';
 
 import styles from './Activities.module.scss';
 
+ import UserForm from './UserFrom';
+
 interface OwnProps {
   isActive?: boolean;
 }

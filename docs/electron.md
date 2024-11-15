@@ -123,7 +123,7 @@ Testing of the "Auto-Updates" feature can be split into severals groups of scena
 
 - version in `package.json` and in `${ENVIRONMENT_URL}/version.txt` files is the same
 - version in `package.json` and in `${ENVIRONMENT_URL}/electronVersion.txt.txt` files is the same
-- no available releases in [public repo](https://github.com/mytonwalletorg/mytonwallet/releases) with version above the one in the `package.json` file
+- no available releases in [public repo](https://github.com/org/mytonwallet/releases) with version above the one in the `package.json` file
 
 **Expected behaviour:** "Update" button is not displayed
 

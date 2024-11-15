@@ -363,7 +363,7 @@ function Settings({
       <div className={styles.slide}>
         {isInsideModal ? (
           <ModalHeader
-            title={lang('Settings234234')}
+            title={lang('Settings')}
             withNotch={isScrolled}
             onClose={handleCloseSettings}
             className={styles.modalHeader}

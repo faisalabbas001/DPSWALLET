@@ -185,6 +185,7 @@ function App({
         slideClassName={buildClassName(styles.appSlide, 'custom-scroll')}
       >
         {renderContent}
+        
       </Transition>
 
       {areSettingsInModal && (

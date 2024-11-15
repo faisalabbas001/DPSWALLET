@@ -256,7 +256,7 @@ export const TON_USDT_SLUG = 'ton-eqcxe6mutq';
 export const TRX_SWAP_COUNT_FEE_ADDRESS = 'TW2LXSebZ7Br1zHaiA2W1zRojDkDwjGmpw';
 
 const TRC20_USDT = {
-  name: 'New token',
+  name: 'DPS ',
   symbol: 'USDT',
   decimals: 6,
   chain: 'tron',
@@ -333,8 +333,8 @@ export const TOKEN_INFO = {
 };
 
 export const TOKEN_WITH_LABEL: Record<string, string> = {
-  [TRC20_USDT_MAINNET_SLUG]: 'TRC-20',
-  [TRC20_USDT_TESTNET_SLUG]: 'TRC-20',
+  [TRC20_USDT_MAINNET_SLUG]: 'TON',
+  [TRC20_USDT_TESTNET_SLUG]: 'TON',
   [TON_USDT_SLUG]: 'TON',
 };
 

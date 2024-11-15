@@ -50,12 +50,12 @@ function AuthStart({ hasAccounts, isLoading, theme }: StateProps) {
         </Button>
       )}
 
-      <img
+      {/* <img
         src={logoPath}
         alt={APP_NAME}
         className={buildClassName(styles.logo, transitionClassNames)}
         onLoad={markLogoReady}
-      />
+      /> */}
       <div className={styles.appName}>{APP_NAME}</div>
       <div className={styles.info}>
         {renderText(lang('$auth_intro'))}
@@ -85,14 +85,14 @@ function AuthStart({ hasAccounts, isLoading, theme }: StateProps) {
           >
             {lang('Secret Words')}
           </Button>
-          {IS_LEDGER_SUPPORTED && (
+          {/* {IS_LEDGER_SUPPORTED && (
             <Button
               className={buildClassName(styles.btn, styles.btn_mini)}
               onClick={!isLoading ? openHardwareWalletModal : undefined}
             >
               {lang('Ledger')}
             </Button>
-          )}
+          )} */}
         </div>
       </div>
     </div>
