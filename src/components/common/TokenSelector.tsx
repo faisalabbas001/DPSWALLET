@@ -144,6 +144,12 @@ function TokenSelector({
   const [renderingKey, setRenderingKey] = useState(SearchState.Initial);
   const [searchTokenList, setSearchTokenList] = useState<Token[]>([]);
 
+
+
+  console.log("the vlue of saeef +++++++++++++++______",searchValue)
+
+
+
   // It is necessary to use useCallback instead of useLastCallback here
   const filterTokens = useCallback((tokens: Token[]) => {
     return filterAndSortTokens(tokens, isMultichain, tokenInSlug, pairsBySlug);

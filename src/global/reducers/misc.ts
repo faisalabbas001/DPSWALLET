@@ -65,7 +65,7 @@ export function createAccount(
     let title = `${titlePrefix} ${accountAmount + 1}${postfix}`;
 
     if (accountAmount === 0) {
-      title = isMainnet ? 'MyTonWalletq12213' : 'Testnet MyTonWallet';
+      title = isMainnet ? 'DPS Wallet' : 'Testnet ';
       shouldForceAccountEdit = false;
     }
 

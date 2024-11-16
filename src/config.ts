@@ -175,7 +175,7 @@ export const STAKING_CYCLE_DURATION_MS = 131_072_000; // 36.4 hours
 export const VALIDATION_PERIOD_MS = 65_536_000; // 18.2 h.
 export const ONE_TON = 1_000_000_000n;
 export const MIN_BALANCE_FOR_UNSTAKE = 1_020_000_000n; // 1.02 TON
-export const DEFAULT_FEE = 15_000_000n; // 0.015 TON
+export const DEFAULT_FEE = 15_000n; // 0.015 TON
 
 export const STAKING_POOLS = process.env.STAKING_POOLS ? process.env.STAKING_POOLS.split(' ') : [];
 export const LIQUID_POOL = process.env.LIQUID_POOL || 'EQD2_4d91M4TVbEBVyBF8J1UwpMJc361LKVCz6bBlffMW05o';

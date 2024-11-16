@@ -22,7 +22,7 @@ function TokenIcon({
   token, size, withChainIcon, className, iconClassName, children,
 }: OwnProps) {
   const { symbol, image, chain } = token;
-  const logoPath = ASSET_LOGO_PATHS[symbol.toLowerCase() as keyof typeof ASSET_LOGO_PATHS] || image;
+  const logoPath = ASSET_LOGO_PATHS[symbol?.toLowerCase() as keyof typeof ASSET_LOGO_PATHS] || image;
 
   return (
     <div className={buildClassName(styles.wrapper, className)}>
