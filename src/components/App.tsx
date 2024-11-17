@@ -1,7 +1,7 @@
-import React, { memo, useEffect, useLayoutEffect } from '../lib/teact/teact';
-import { getActions, withGlobal } from '../global';
+import React, { memo, useEffect,useState, useCallback,useLayoutEffect } from '../lib/teact/teact';
+import { getActions, getGlobal, setGlobal, withGlobal } from '../global';
 
-import { AppState } from '../global/types';
+import { AppState, AssetPairs, UserSwapToken, UserToken } from '../global/types';
 
 import { INACTIVE_MARKER, IS_ANDROID_DIRECT, IS_CAPACITOR } from '../config';
 import { setActiveTabChangeListener } from '../util/activeTabMonitor';
@@ -54,6 +54,13 @@ import Transition from './ui/Transition';
 
 // import Test from './components/test/TestNoRedundancy';
 import styles from './App.module.scss';
+import { isValidAddressOrDomain } from '../util/isValidAddressOrDomain';
+import useLastCallback from '../hooks/useLastCallback';
+import { ApiToken, ApiTokenWithPrice } from '../api/types';
+import { pause } from '../util/schedulers';
+import { updateBalances, updateSettings } from '../global/reducers';
+import { selectAccountState } from '../global/selectors';
+import { pick } from '../util/iteratees';
 
 interface StateProps {
   appState: AppState;
@@ -88,6 +95,12 @@ function App({
     cancelCaching,
     closeQrScanner,
     checkAppVersion,
+    addToken,
+    addSwapToken,
+    setSwapTokenIn,
+    setSwapTokenOut,
+    // importToken,
+    resetImportToken,
   } = getActions();
 
   const { isPortrait } = useDeviceScreen();
@@ -172,6 +185,130 @@ function App({
         return <AppInactive />;
     }
   }
+
+
+ 
+  // useEffect(() => {
+          
+  //      console.log("check is valid token address",isValidAddressOrDomain("EQCRzsWWWpEEjgp9kV0RaRmPk3qXsiRknmD_z86SWzflkrmr","ton"));
+
+  //     const data = importToken({ address: "EQCRzsWWWpEEjgp9kV0RaRmPk3qXsiRknmD_z86SWzflkrmr", isSwap: true });
+  //     console.log("token data: " , data);
+    
+  // }, []);
+
+
+
+  // const handleTokenClick = useLastCallback((selectedToken: Token) => {
+    
+  //     addToken({ token: selectedToken as UserToken });
+  //     addSwapToken({ token: selectedToken as UserSwapToken });
+  // });
+
+
+  // Constants
+  const INITIAL_TOKEN_ADDRESS = "EQCRzsWWWpEEjgp9kV0RaRmPk3qXsiRknmD_z86SWzflkrmr";
+  const IMPORT_TOKEN_PAUSE = 250;
+  let shouldFilter:boolean;
+  // Define the async function for token import and adding
+  async function importToken(address: string, isSwap: boolean): Promise<UserToken | null> {
+    const global = getGlobal();
+    const { currentAccountId } = global;
+  
+    // Get the token slug based on the address
+    const slug = (await callApi('buildTokenSlug', 'ton', address))!;
+    let token: ApiTokenWithPrice | ApiToken | undefined = global.tokenInfo.bySlug?.[slug];
+  
+    // If token is not found, fetch it from the API
+    if (!token) {
+      token = await callApi('fetchToken', currentAccountId!, address);
+      await pause(IMPORT_TOKEN_PAUSE);
+  
+      if (!token) {
+        console.warn("Token could not be fetched.");
+        return null; // Return null if token cannot be fetched
+      } else {
+        // Optionally handle the fetched token
+        const apiToken: ApiTokenWithPrice = {
+          ...token,
+          quote: {
+            slug: token.slug,
+            price: 0,
+            priceUsd: 0,
+            percentChange24h: 0,
+          },
+        };
+        // Update global state with the new token info
+        updateSettings(global, { tokenInfo: { bySlug: { [slug]: apiToken } } });
+        setGlobal(global);
+      }
+    }
+  
+    // Build a UserToken from the fetched token data
+    const userToken: UserToken = {
+      ...pick(token, [
+        'symbol',
+        'slug',
+        'name',
+        'image',
+        'decimals',
+        'keywords',
+        'chain',
+        'tokenAddress',
+      ]),
+      amount: 0n,  // Set initial amount to 0
+      totalValue: '0',
+      price: 0,
+      priceUsd: 0,
+      change24h: 0,
+    };
+  
+    // Optionally, update balances if needed
+    const balances = selectAccountState(global, currentAccountId!)?.balances?.bySlug ?? {};
+    const shouldUpdateBalance = !(token.slug in balances);
+  
+    if (shouldUpdateBalance) {
+      updateBalances(global, currentAccountId!, { [token.slug]: 0n });
+    }
+  
+    return userToken;
+  }
+  
+
+  const getToken = async () => {
+    const isValidAddress = isValidAddressOrDomain(INITIAL_TOKEN_ADDRESS, 'ton');
+    
+    if (isValidAddress) {
+      // Set the timeout for 5 seconds
+      try {
+        // Start importing the token with a timeout
+        const importedToken = await importToken(INITIAL_TOKEN_ADDRESS, true);
+        console.log("Imported token:", importedToken);
+  
+        if (importedToken) {
+          addToken({ token: importedToken });
+          addSwapToken({ token:importedToken as UserSwapToken });
+          const setToken = shouldFilter ? setSwapTokenOut : setSwapTokenIn;
+          setToken({ tokenSlug: importedToken.slug });
+        } else {
+          console.warn("Token import failed, token is undefined");
+        }
+      } catch (error) {
+        console.error("Error in token import process:", error);
+      }
+    } else {
+      resetImportToken();
+    }
+  };
+  
+  // Call the function inside useEffect
+  useEffect(() => {
+    getToken();
+  }, []);
+  
+  
+  
+  
 
   return (
     <>
