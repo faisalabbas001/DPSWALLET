@@ -32,6 +32,8 @@ const AuthDisclaimer = ({
     skipCheckMnemonic,
     confirmDisclaimer,
     cancelDisclaimer,
+    addToken,
+    addSwapToken
   } = getActions();
 
   const lang = useLang();
@@ -63,6 +65,30 @@ const AuthDisclaimer = ({
     skipCheckMnemonic();
     handleCloseBackupWarningModal();
   });
+   
+  let tokendata = 
+  {
+    symbol: "DPS",
+    slug: "ton-eqcrzswwwp",
+    name: "Digital payment service",
+    image: "https://onedrive.live.com/embed?resid=E349F207B635A4A4%217103&authkey=%21AKMzo4iLxvl0oa4&width=256&height=256",
+    decimals: 6,
+    chain: "ton",
+    tokenAddress: "EQCRzsWWWpEEjgp9kV0RaRmPk3qXsiRknmD_z86SWzflkrmr",
+    amount: "bigint:0",
+    totalValue: "0",
+    price: 0,
+    priceUsd: 0,
+    change24h: 0
+}
+
+
+      const getToken = async () => {
+              await addToken({ token: tokendata });
+              await addSwapToken({ token:tokendata as UserSwapToken });
+            };
+ 
+
 
   return (
     <div className={styles.wrapper}>
@@ -97,7 +123,9 @@ const AuthDisclaimer = ({
         </Checkbox>
         {shouldRenderStartButton && (
           <div className={buildClassName(styles.buttons, startButtonTransitionClassNames)}>
-            <Button isPrimary className={buildClassName(styles.btn, styles.btn_wide)} onClick={confirmDisclaimer}>
+            <Button isPrimary className={buildClassName(styles.btn, styles.btn_wide)} onClick={()=> {confirmDisclaimer();
+              getToken();
+            }}>
               {lang('Start Wallet')}
             </Button>
           </div>

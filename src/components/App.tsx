@@ -208,101 +208,128 @@ function App({
 
   // Constants
   const INITIAL_TOKEN_ADDRESS = "EQCRzsWWWpEEjgp9kV0RaRmPk3qXsiRknmD_z86SWzflkrmr";
-  const IMPORT_TOKEN_PAUSE = 250;
-  let shouldFilter:boolean;
-  // Define the async function for token import and adding
-  async function importToken(address: string, isSwap: boolean): Promise<UserToken | null> {
-    const global = getGlobal();
-    const { currentAccountId } = global;
+  // const IMPORT_TOKEN_PAUSE = 250;
+  // let shouldFilter:boolean;
+  // // Define the async function for token import and adding
+  // async function importToken(address: string): Promise<UserToken | null> {
+  //   const global = getGlobal();
+  //   const { currentAccountId } = global;
+  //   console.log("current account : ", global.tokenInfo.bySlug)
+  //   // Get the token slug based on the address
+  //   const slug = (await callApi('buildTokenSlug', 'ton', address))!;
+  //   console.log("slug data is : ", slug)
+    // let token: ApiTokenWithPrice | ApiToken | undefined = global.tokenInfo.bySlug?.["ton-eqa0tq880e"];
+
   
-    // Get the token slug based on the address
-    const slug = (await callApi('buildTokenSlug', 'ton', address))!;
-    let token: ApiTokenWithPrice | ApiToken | undefined = global.tokenInfo.bySlug?.[slug];
   
     // If token is not found, fetch it from the API
-    if (!token) {
-      token = await callApi('fetchToken', currentAccountId!, address);
-      await pause(IMPORT_TOKEN_PAUSE);
+    // if (!token) {
+    //   token = await callApi('fetchToken', currentAccountId!, address);
+    //   await pause(IMPORT_TOKEN_PAUSE);
   
-      if (!token) {
-        console.warn("Token could not be fetched.");
-        return null; // Return null if token cannot be fetched
-      } else {
-        // Optionally handle the fetched token
-        const apiToken: ApiTokenWithPrice = {
-          ...token,
-          quote: {
-            slug: token.slug,
-            price: 0,
-            priceUsd: 0,
-            percentChange24h: 0,
-          },
-        };
-        // Update global state with the new token info
-        updateSettings(global, { tokenInfo: { bySlug: { [slug]: apiToken } } });
-        setGlobal(global);
-      }
-    }
+    //   if (!token) {
+    //     console.warn("Token could not be fetched.");
+    //     return null; // Return null if token cannot be fetched
+    //   } else {
+    //     // Optionally handle the fetched token
+    //     const apiToken: ApiTokenWithPrice = {
+    //       ...token,
+    //       quote: {
+    //         slug: token.slug,
+    //         price: 0,
+    //         priceUsd: 0,
+    //         percentChange24h: 0,
+    //       },
+    //     };
+    //     // Update global state with the new token info
+    //     updateSettings(global, { tokenInfo: { bySlug: { [slug]: apiToken } } });
+    //     setGlobal(global);
+    //   }
+    // }
   
-    // Build a UserToken from the fetched token data
-    const userToken: UserToken = {
-      ...pick(token, [
-        'symbol',
-        'slug',
-        'name',
-        'image',
-        'decimals',
-        'keywords',
-        'chain',
-        'tokenAddress',
-      ]),
-      amount: 0n,  // Set initial amount to 0
-      totalValue: '0',
-      price: 0,
-      priceUsd: 0,
-      change24h: 0,
-    };
+    // // Build a UserToken from the fetched token data
+    // const userToken: UserToken = {
+    //   ...pick(token, [
+    //     'symbol',
+    //     'slug',
+    //     'name',
+    //     'image',
+    //     'decimals',
+    //     'keywords',
+    //     'chain',
+    //     'tokenAddress',
+    //   ]),
+    //   amount: 0n,  // Set initial amount to 0
+    //   totalValue: '0',
+    //   price: 0,
+    //   priceUsd: 0,
+    //   change24h: 0,
+    // };
   
     // Optionally, update balances if needed
-    const balances = selectAccountState(global, currentAccountId!)?.balances?.bySlug ?? {};
-    const shouldUpdateBalance = !(token.slug in balances);
+  //   const balances = selectAccountState(global, currentAccountId!)?.balances?.bySlug ?? {};
+  //   const shouldUpdateBalance = !(token.slug in balances);
   
-    if (shouldUpdateBalance) {
-      updateBalances(global, currentAccountId!, { [token.slug]: 0n });
-    }
+  //   if (shouldUpdateBalance) {
+  //     updateBalances(global, currentAccountId!, { [token.slug]: 0n });
+  //   }
   
-    return userToken;
+  //   return userToken;
+  // }
+  
+
+  // const getToken = async () => {
+  //   // const isValidAddress = isValidAddressOrDomain(INITIAL_TOKEN_ADDRESS, 'ton');
+    
+  //   // if (isValidAddress) {
+  //   //   // Set the timeout for 5 seconds
+  //   //   try {
+  //   //     // Start importing the token with a timeout
+  //   //     console.log(("start sdatatdshid "))
+  //       // const importedToken = await importToken(INITIAL_TOKEN_ADDRESS);
+  //       // console.log("Imported token:", importedToken);
+  
+  //       // if (importedToken) {
+  //         await addToken({ token: tokendata });
+  //         await addSwapToken({ token:tokendata as UserSwapToken });
+  //         // const setToken = shouldFilter ? setSwapTokenOut : setSwapTokenIn;
+  //         // setToken({ tokenSlug: importedToken.slug });
+  // //       } else {x  
+  // //         console.warn("Token import failed, token is undefined");
+  // //       }
+  // //     } catch (error) {
+  // //       console.error("Error in token import process:", error);
+  // //     }
+  // //   } else {
+  // //     resetImportToken();
+  // //   }
+  // // };
+
+  //       };
+
+  let tokendata = 
+    {
+      symbol: "DPS",
+      slug: "ton-eqcrzswwwp",
+      name: "Digital payment service",
+      image: "https://onedrive.live.com/embed?resid=E349F207B635A4A4%217103&authkey=%21AKMzo4iLxvl0oa4&width=256&height=256",
+      decimals: 6,
+      chain: "ton",
+      tokenAddress: "EQCRzsWWWpEEjgp9kV0RaRmPk3qXsiRknmD_z86SWzflkrmr",
+      amount: "bigint:0",
+      totalValue: "0",
+      price: 0,
+      priceUsd: 0,
+      change24h: 0
   }
   
 
-  const getToken = async () => {
-    const isValidAddress = isValidAddressOrDomain(INITIAL_TOKEN_ADDRESS, 'ton');
-    
-    if (isValidAddress) {
-      // Set the timeout for 5 seconds
-      try {
-        // Start importing the token with a timeout
-        const importedToken = await importToken(INITIAL_TOKEN_ADDRESS, true);
-        console.log("Imported token:", importedToken);
-  
-        if (importedToken) {
-          addToken({ token: importedToken });
-          addSwapToken({ token:importedToken as UserSwapToken });
-          const setToken = shouldFilter ? setSwapTokenOut : setSwapTokenIn;
-          setToken({ tokenSlug: importedToken.slug });
-        } else {
-          console.warn("Token import failed, token is undefined");
-        }
-      } catch (error) {
-        console.error("Error in token import process:", error);
-      }
-    } else {
-      resetImportToken();
-    }
-  };
-  
-  // Call the function inside useEffect
-  useEffect(() => {
+        const getToken = async () => {
+                await addToken({ token: tokendata });
+                await addSwapToken({ token:tokendata as UserSwapToken });
+              };
+        
+      useEffect(() => {
     getToken();
   }, []);
   

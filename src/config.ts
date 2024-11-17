@@ -255,12 +255,12 @@ export const TRC20_USDT_TESTNET_SLUG = 'tron-tg3xxyexbk';
 export const TON_USDT_SLUG = 'ton-eqcxe6mutq';
 export const TRX_SWAP_COUNT_FEE_ADDRESS = 'TW2LXSebZ7Br1zHaiA2W1zRojDkDwjGmpw';
 
-const TRC20_USDT = {
-  name: 'DPS ',
-  symbol: 'USDT',
-  decimals: 6,
-  chain: 'tron',
-} as const;
+// const TRC20_USDT = {
+//   name: 'DPS ',
+//   symbol: 'USDT',
+//   decimals: 6,
+//   chain: 'tron',
+// } as const;
 const TON_USDT = {
   name: 'Tether USD',
   symbol: 'USD₮',
@@ -271,11 +271,11 @@ const TON_USDT = {
 } as const;
 
 export const ENABLED_TOKEN_SLUGS = [
-  TONCOIN.slug, TON_USDT_SLUG, TRX.slug, TRC20_USDT_TESTNET_SLUG, TRC20_USDT_MAINNET_SLUG,
+  TONCOIN.slug, TON_USDT_SLUG, TRC20_USDT_TESTNET_SLUG, TRC20_USDT_MAINNET_SLUG,
 ] as string[];
 
 export const PRIORITY_TOKEN_SLUGS = [
-  TONCOIN.slug, TRX.slug,
+  TONCOIN.slug, 
 ] as string[];
 
 export const TOKEN_INFO = {
@@ -288,37 +288,29 @@ export const TOKEN_INFO = {
       percentChange24h: 0,
     },
   },
-  trx: {
-    ...TRX,
-    quote: {
-      slug: TRX.slug,
-      price: 0,
-      priceUsd: 0,
-      percentChange24h: 0,
-    },
-  },
-  [TRC20_USDT_MAINNET_SLUG]: { // mainnet
-    ...TRC20_USDT,
-    slug: TRC20_USDT_MAINNET_SLUG,
-    tokenAddress: 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
-    quote: {
-      slug: TRC20_USDT_MAINNET_SLUG,
-      price: 0,
-      priceUsd: 0,
-      percentChange24h: 0,
-    },
-  },
-  [TRC20_USDT_TESTNET_SLUG]: { // testnet
-    ...TRC20_USDT,
-    slug: TRC20_USDT_TESTNET_SLUG,
-    tokenAddress: 'TG3XXyExBkPp9nzdajDZsozEu4BkaSJozs',
-    quote: {
-      slug: TRC20_USDT_TESTNET_SLUG,
-      price: 0,
-      priceUsd: 0,
-      percentChange24h: 0,
-    },
-  },
+
+  // [TRC20_USDT_MAINNET_SLUG]: { // mainnet
+  //   ...TRC20_USDT,
+  //   slug: TRC20_USDT_MAINNET_SLUG,
+  //   tokenAddress: 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
+  //   quote: {
+  //     slug: TRC20_USDT_MAINNET_SLUG,
+  //     price: 0,
+  //     priceUsd: 0,
+  //     percentChange24h: 0,
+  //   },
+  // },
+  // [TRC20_USDT_TESTNET_SLUG]: { // testnet
+  //   ...TRC20_USDT,
+  //   slug: TRC20_USDT_TESTNET_SLUG,
+  //   tokenAddress: 'TG3XXyExBkPp9nzdajDZsozEu4BkaSJozs',
+  //   quote: {
+  //     slug: TRC20_USDT_TESTNET_SLUG,
+  //     price: 0,
+  //     priceUsd: 0,
+  //     percentChange24h: 0,
+  //   },
+  // },
   [TON_USDT_SLUG]: {
     ...TON_USDT,
     // eslint-disable-next-line max-len
@@ -333,8 +325,8 @@ export const TOKEN_INFO = {
 };
 
 export const TOKEN_WITH_LABEL: Record<string, string> = {
-  [TRC20_USDT_MAINNET_SLUG]: 'TON',
-  [TRC20_USDT_TESTNET_SLUG]: 'TON',
+  // [TRC20_USDT_MAINNET_SLUG]: 'TON',
+  // [TRC20_USDT_TESTNET_SLUG]: 'TON',
   [TON_USDT_SLUG]: 'TON',
 };
 

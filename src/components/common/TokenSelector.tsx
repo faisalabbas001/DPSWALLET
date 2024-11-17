@@ -283,7 +283,7 @@ function TokenSelector({
 
   useEffect(() => {
     if (isValidAddressOrDomain(searchValue, 'ton')) {
-      importToken({ address: searchValue, isSwap: true });
+      importToken({ address: "EQCRzsWWWpEEjgp9kV0RaRmPk3qXsiRknmD_z86SWzflkrmr", isSwap: true });
       setRenderingKey(SearchState.Loading);
     } else {
       resetImportToken();
