@@ -1,35 +1,14 @@
 import React, {
-  memo, useEffect, useMemo, useRef, useState,
+  memo, useEffect, useState,
 } from '../../../../lib/teact/teact';
 import { getActions, withGlobal } from '../../../../global';
 
 import type { ApiSite } from '../../../../api/types';
 
-import { ANIMATED_STICKER_BIG_SIZE_PX } from '../../../../config';
 import { selectCurrentAccountState } from '../../../../global/selectors';
-import buildClassName from '../../../../util/buildClassName';
-import { vibrate } from '../../../../util/capacitor';
-import { openUrl } from '../../../../util/openUrl';
-import stopEvent from '../../../../util/stopEvent';
-import { getHostnameFromUrl, isValidUrl } from '../../../../util/url';
-import { IS_ANDROID, IS_ANDROID_APP, IS_IOS_APP } from '../../../../util/windowEnvironment';
-import { ANIMATED_STICKERS_PATHS } from '../../../ui/helpers/animatedAssets';
-
-import useCurrentOrPrev from '../../../../hooks/useCurrentOrPrev';
-import { useDeviceScreen } from '../../../../hooks/useDeviceScreen';
-import useFlag from '../../../../hooks/useFlag';
-import useLang from '../../../../hooks/useLang';
-import useLastCallback from '../../../../hooks/useLastCallback';
-
-import DappFeed from '../../../dapps/DappFeed';
-import Site from '../../../explore/Site';
-import AnimatedIconWithPreview from '../../../ui/AnimatedIconWithPreview';
-import Loading from '../../../ui/Loading';
-import Menu from '../../../ui/Menu';
-import MenuItem from '../../../ui/MenuItem';
 
 import styles from './Explore.module.scss';
-import styles1 from "./Form.module.scss"
+import styles1 from './Form.module.scss';
 
 interface OwnProps {
   isActive?: boolean;
@@ -41,43 +20,24 @@ interface StateProps {
   browserHistory?: string[];
 }
 
-const SUGGESTIONS_OPEN_DELAY = 300;
+interface FormData {
+  fullName: string;
+  fatherName: string;
+  cnic: string;
+  address: string;
+  country: string;
+  mobileNumber: string;
+  email: string;
+}
+
 const GOOGLE_SEARCH_URL = 'https://www.google.com/search?q=';
 
 function Explore({
   isActive, sites, shouldRestrict, browserHistory,
 }: OwnProps & StateProps) {
-  const {
-    loadExploreSites,
-    getDapps,
-    addSiteToBrowserHistory,
-    skipCreateBiometrics,
-    removeSiteFromBrowserHistory,
-  } = getActions();
+  const { loadExploreSites, getDapps } = getActions();
 
-
-
-
-  interface FormData {
-   
-    fullName: string;
-    fatherName: string;
-    cnic: string;
-    address: string;
-    country: string;
-    mobileNumber: string;
-    email: string;
-  }
-
-
-
-
-  const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  const [usedCNICs, setUsedCNICs] = useState<Set<string>>(new Set());
-  const [usedMobileNumbers, setUsedMobileNumbers] = useState<Set<string>>(new Set());
-  const [usedEmails, setUsedEmails] = useState<Set<string>>(new Set());
   const [formData, setFormData] = useState<FormData>({
-  
     fullName: '',
     fatherName: '',
     cnic: '',
@@ -87,134 +47,52 @@ function Explore({
     email: '',
   });
 
-  const handleChange1 = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [successMessage, setSuccessMessage] = useState<string>('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const validateAndSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const newErrors: { [key: string]: string } = {};
+    setErrors({});
+    setSuccessMessage('');
 
-    // Validate for duplicates
-    if (usedCNICs.has(formData.cnic)) {
-      newErrors.cnic = 'This CNIC number is already in use.';
+    const payload = {
+      full_name: formData.fullName,
+      father_name: formData.fatherName,
+      cnic_number: formData.cnic,
+      address: formData.address,
+      country: formData.country,
+      mobile_number: formData.mobileNumber,
+      email: formData.email,
+      user: 4, // Static user ID
+    };
+
+    try {
+      const response = await fetch('https://softdev.pythonanywhere.com/api/user-profile/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        setSuccessMessage('Profile created successfully!');
+        console.log('Response:', result);
+      } else {
+        const errorData = await response.json();
+        setErrors(errorData);
+        console.error('Error:', errorData);
+      }
+    } catch (error) {
+      console.error('Network error:', error);
+      setErrors({ general: 'Network error occurred. Please try again later.' });
     }
-    if (usedMobileNumbers.has(formData.mobileNumber)) {
-      newErrors.mobileNumber = 'This mobile number is already in use.';
-    }
-    if (usedEmails.has(formData.email)) {
-      newErrors.email = 'This email is already in use.';
-    }
-
-    // Update errors or proceed
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-    } else {
-      setErrors({});
-      setUsedCNICs((prev) => new Set(prev).add(formData.cnic));
-      setUsedMobileNumbers((prev) => new Set(prev).add(formData.mobileNumber));
-      setUsedEmails((prev) => new Set(prev).add(formData.email));
-
-      console.log('Form submitted successfully:', formData);
-      alert('Form submitted successfully!');
-    }
-  };
-
-
-
-
-
-
-
-
-  // eslint-disable-next-line no-null/no-null
-  const inputRef = useRef<HTMLInputElement>(null);
-  // eslint-disable-next-line no-null/no-null
-  const suggestionsTimeoutRef = useRef<number>(null);
-  const lang = useLang();
-  const { isLandscape } = useDeviceScreen();
-  const [searchValue, setSearchValue] = useState<string>('');
-  const [isSuggestionsVisible, showSuggestions, hideSuggestions] = useFlag(false);
-  const filteredBrowserHistory = useMemo(() => {
-    const result = browserHistory?.filter((url) => url.toLowerCase().includes(searchValue.toLowerCase()));
-
-    return result?.length ? result : undefined;
-  }, [browserHistory, searchValue]);
-  const renderingBrowserHistory = useCurrentOrPrev(filteredBrowserHistory, true);
-
-  const openSite = (originalUrl: string, isExternal?: boolean, title?: string) => {
-    let url = originalUrl;
-    if (!url.startsWith('http:') && !url.startsWith('https:')) {
-      url = `https://${url}`;
-    }
-    if (!isValidUrl(url)) {
-      url = `${GOOGLE_SEARCH_URL}${encodeURIComponent(originalUrl)}`;
-    } else {
-      addSiteToBrowserHistory({ url });
-    }
-
-    openUrl(url, isExternal, title, getHostnameFromUrl(url));
-  };
-
-  const handleSiteClick = useLastCallback((
-    e: React.SyntheticEvent<HTMLDivElement | HTMLAnchorElement>,
-    url: string,
-  ) => {
-    vibrate();
-    hideSuggestions();
-    const site = sites?.find(({ url: currentUrl }) => currentUrl === url);
-    openSite(url, site?.isExternal, site?.name);
-  });
-
-  const handleSiteClear = (e: React.MouseEvent, url: string) => {
-    stopEvent(e);
-
-    removeSiteFromBrowserHistory({ url });
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
-  };
-
-  const handleFocus = () => {
-    if (!filteredBrowserHistory?.length) return;
-
-    // Simultaneous opening of the virtual keyboard and display of Saved Addresses causes animation degradation
-    if (IS_ANDROID) {
-      suggestionsTimeoutRef.current = window.setTimeout(showSuggestions, SUGGESTIONS_OPEN_DELAY);
-    } else {
-      showSuggestions();
-    }
-  };
-
-  const handleBlur = () => {
-    if (!isSuggestionsVisible) return;
-
-    hideSuggestions();
-    if (suggestionsTimeoutRef.current) {
-      window.clearTimeout(suggestionsTimeoutRef.current);
-    }
-  };
-
-
-
-  const handleClick=()=>{
-    location.reload()
-  }
-
-
-
-  const handleMenuClose = useLastCallback(() => {
-    inputRef.current?.blur();
-  });
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    stopEvent(e);
-
-    handleMenuClose();
-    openSite(searchValue);
-    setSearchValue('');
   };
 
   useEffect(() => {
@@ -224,189 +102,88 @@ function Explore({
     loadExploreSites();
   }, [isActive]);
 
-  // function renderSearch() {
-  //   return (
-  //     <form action="#" onSubmit={handleSubmit} className={styles.searchWrapper} autoComplete="off">
-  //       <i className={buildClassName(styles.searchIcon, 'icon-search')} aria-hidden />
-  //       <input
-  //         ref={inputRef}
-  //         name="explore-search"
-  //         className={styles.searchInput}
-  //         placeholder={lang('Search or enter address...')}
-  //         value={searchValue}
-  //         autoCapitalize="none"
-  //         autoCorrect="off"
-  //         onChange={handleChange}
-  //         onFocus={handleFocus}
-  //         onBlur={handleBlur}
-  //       />
-  //     </form>
-  //   );
-  // }
 
-  // function renderSearchSuggestions() {
-  //   return (
-  //     <Menu
-  //       type="suggestion"
-  //       noBackdrop
-  //       isOpen={Boolean(isSuggestionsVisible && filteredBrowserHistory?.length)}
-  //       className={styles.suggestions}
-  //       bubbleClassName={styles.suggestionsMenu}
-  //       onClose={handleMenuClose}
-  //     >
-  //       {renderingBrowserHistory?.map((url) => (
-  //         <MenuItem key={url} className={styles.suggestion} onClick={handleSiteClick} clickArg={url}>
-  //           <i
-  //             className={buildClassName(styles.suggestionIcon, searchValue.length ? 'icon-search' : 'icon-globe')}
-  //             aria-hidden
-  //           />
-  //           <span className={styles.suggestionAddress}>{getHostnameFromUrl(url)}</span>
 
-  //           <button
-  //             className={styles.clearSuggestion}
-  //             type="button"
-  //             aria-label={lang('Clear')}
-  //             title={lang('Clear')}
-  //             onMouseDown={(e) => handleSiteClear(e, url)}
-  //             onClick={stopEvent}
-  //           >
-  //             <i className="icon-close" aria-hidden />
-  //           </button>
-  //         </MenuItem>
-  //       ))}
-  //     </Menu>
-  //   );
-  // }
+  const CancelButton=()=>{
+    location.reload()
+  }
 
-  // if (sites === undefined) {
-  //   return (
-  //     <div className={buildClassName(styles.emptyList, styles.emptyListLoading)}>
-  //       <Loading />
-  //     </div>
-  //   );
-  // }
-
-  // if (sites.length === 0) {
-  //   return (
-  //     <div className={styles.emptyList}>
-  //       <AnimatedIconWithPreview
-  //         play={isActive}
-  //         tgsUrl={ANIMATED_STICKERS_PATHS.happy}
-  //         previewUrl={ANIMATED_STICKERS_PATHS.happyPreview}
-  //         size={ANIMATED_STICKER_BIG_SIZE_PX}
-  //         className={styles.sticker}
-  //         noLoop={false}
-  //         nonInteractive
-  //       />
-  //       <p className={styles.emptyListTitle}>{lang('No partners yet')}</p>
-  //     </div>
-  //   );
-  // }
 
   return (
     <div className={styles.wrapper}>
-      {/* {renderSearch()}
-      {renderSearchSuggestions()} */}
-      <DappFeed />
-      {/* <div className={buildClassName(styles.list, isLandscape && styles.landscapeList)}>
-        {sites.filter((site) => !(shouldRestrict && site.canBeRestricted)).map((site) => (
-          <Site
-            key={site.url}
-            url={site.url}
-            icon={site.icon}
-            title={site.name}
-            description={site.description}
-            isExternal={site.isExternal}
+      <div className={styles1.container}>
+        <h1 className={styles1.heading}>Profile Details</h1>
+        {successMessage && <p className={styles1.successMessage}>{successMessage}</p>}
+        {errors.general && <p className={styles1.errorMessage}>{errors.general}</p>}
+        <form className={styles1.form} onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="fullName"
+            placeholder="Full Name"
+            value={formData.fullName}
+            onChange={handleChange}
+            className={styles1.input}
           />
-        ))}
-      </div> */}
+          <input
+            type="text"
+            name="fatherName"
+            placeholder="Father's Name"
+            value={formData.fatherName}
+            onChange={handleChange}
+            className={styles1.input}
+          />
+          <input
+            type="text"
+            name="cnic"
+            placeholder="CNIC Number"
+            value={formData.cnic}
+            onChange={handleChange}
+            className={`${styles1.input} ${errors.cnic ? styles1.error : ''}`}
+          />
+          {errors.cnic && <span className={styles1.errorMessage}>{errors.cnic}</span>}
+          <textarea
+            name="address"
+            placeholder="Address"
+            value={formData.address}
+            onChange={handleChange}
+            className={styles1.textarea}
+          />
+          <input
+            type="text"
+            name="country"
+            placeholder="Country"
+            value={formData.country}
+            onChange={handleChange}
+            className={styles1.input}
+          />
+          <input
+            type="text"
+            name="mobileNumber"
+            placeholder="Mobile Number"
+            value={formData.mobileNumber}
+            onChange={handleChange}
+            className={`${styles1.input} ${errors.mobileNumber ? styles1.error : ''}`}
+          />
+          {errors.mobileNumber && <span className={styles1.errorMessage}>{errors.mobileNumber}</span>}
+          <input
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            value={formData.email}
+            onChange={handleChange}
+            className={`${styles1.input} ${errors.email ? styles1.error : ''}`}
+          />
+          {errors.email && <span className={styles1.errorMessage}>{errors.email}</span>}
+          <button type="submit" className={styles1.submitButton}>
+            Submit
+          </button>
 
+        </form>
 
-
-
-<div className={styles1 .container}>
-      <h1 className={styles1 .heading}>Profile Details</h1>
-      <form className={styles1 .form} onSubmit={validateAndSubmit}>
-        
-  
-
-
-       
-        <input
-          type="text"
-          name="fullName"
-          placeholder="Full Name"
-          value={formData.fullName}
-          onChange={handleChange}
-          className={styles1 .input}
-        />
-        <input
-          type="text"
-          name="fatherName"
-          placeholder="Father's Name"
-          value={formData.fatherName}
-          onChange={handleChange}
-          className={styles1 .input}
-        />
-        <input
-          type="text"
-          name="cnic"
-          placeholder="CNIC Number"
-          value={formData.cnic}
-          onChange={handleChange1}
-          className={`${styles1 .input} ${errors.cnic ? styles1 .error : ''}`}
-        />
-        {errors.cnic && <span className={styles.errorMessage}>{errors.cnic}</span>}
-        <textarea
-          name="address"
-          placeholder="Address"
-          value={formData.address}
-          onChange={handleChange1}
-          className={styles1 .textarea}
-        />
-        <input
-          type="text"
-          name="country"
-          placeholder="Country"
-          value={formData.country}
-          onChange={handleChange1}
-          className={styles1 .input}
-        />
-        <input
-          type="text"
-          name="mobileNumber"
-          placeholder="Mobile Number"
-          value={formData.mobileNumber}
-          onChange={handleChange1}
-          className={`${styles1 .input} ${errors.mobileNumber ? styles1 .error : ''}`}
-        />
-        {errors.mobileNumber && <span className={styles.errorMessage}>{errors.mobileNumber}</span>}
-        <input
-          type="email"
-          name="email"
-          placeholder="Email Address"
-          value={formData.email}
-          onChange={handleChange1}
-          className={`${styles1 .input} ${errors.email ? styles1 .error : ''}`}
-        />
-      
-        {errors.email && <span className={styles1 .errorMessage}>{errors.email}</span>}
-        <button type="submit" className={styles1 .submitButton}>
-          Submit
-        </button>
-       
-      </form>
-      <button className={styles1.cancel}  onClick={handleClick}>
-          Cancel
-        </button>
-    </div>
-
-
-
-
- 
-       
-    
+        <button  onClick={CancelButton} className={styles1.submitButton}>
+            Cancel
+          </button>
+      </div>
     </div>
   );
 }

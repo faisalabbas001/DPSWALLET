@@ -1,6 +1,6 @@
 {
-    "name": "MyTonWallet",
-    "short_name": "MyTonWallet",
+    "name": "DPS Wallet",
+    "short_name": "DPS Wallet",
     "start_url": "./",
     "gcm_sender_id": "122867383838",
     "icons": [

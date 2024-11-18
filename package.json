@@ -1,5 +1,5 @@
 {
-  "name": "mytonwallet",
+  "name": "DPS Wallet",
   "version": "3.0.33",
   "description": "The most feature-rich web wallet and browser extension for TON – with support of multi-accounts, tokens (jettons), NFT, TON DNS, TON Sites, TON Proxy, and TON Magic.",
   "main": "index.js",
@@ -57,7 +57,7 @@
     "*.{ts,tsx,js}": "eslint --fix",
     "*.{css,scss}": "stylelint --fix"
   },
-  "author": "MyTonWallet",
+  "author": "DPS Wallet",
   "license": "GPL-3.0-or-later",
   "protocols": [
     {
@@ -74,7 +74,7 @@
       ]
     },
     {
-      "name": "MyTonWallet",
+      "name": "DPS Wallet",
       "schemes": [
         "mtw"
       ]

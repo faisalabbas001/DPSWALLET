@@ -29,7 +29,7 @@ def capacitor_pods
   pod 'CordovaPlugins', :path => '../capacitor-cordova-ios-plugins'
 end
 
-target 'MyTonWallet' do
+target 'DPS Wallet' do
   capacitor_pods
   # Add your Pods here
   pod 'FloatingPanel', :git => 'https://github.com/mytonwalletorg/FloatingPanel', :commit => '124f09299ee26544cad45f95f2e3cb085b76f11a'

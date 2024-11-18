@@ -1,4 +1,4 @@
-# MyTonWallet Giveaways
+# DPS Wallet Giveaways
 
 User Interface for the MTW Giveaways App
 

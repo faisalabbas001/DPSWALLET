@@ -4,7 +4,7 @@ $auth_intro: |
   a la **velocidad de la luz**.
 Create New Wallet: Crear un monedero nuevo
 Import From %1$d Secret Words: Importar usando la frase semilla
-About MyTonWallet: Acerca de MyTonWallet
+About DPS Wallet: Acerca de DPS Wallet
 Creating Wallet...: Creando monedero...
 On the count of three...: A la cuenta de tres...
 Back Up: Siguiente
@@ -76,7 +76,7 @@ $about_extension_description2: TON Magic proporciona **integración nativa con T
 $about_extension_description3: Actívalo para enviar y recibir Toncoins de cualquier usuario de Telegram.
 $about_proxy_magic_title: ¿Qué pasa con %ninja% TON Proxy y %unicorn% TON Magic?
 $about_proxy_magic_description: Para disfrutar de **Internet descentralizado**, acceder a **TON Sites**, y aprovechar la **integración nativa de Telegram**, no dude en instalar la %extension_link%.
-$about_extension_link_text: "**extensión MyTonWallet**"
+$about_extension_link_text: "**extensión DPS Wallet**"
 Is it open source?: ¿Es de código abierto?
 $about_wallet_github: Sí. Siéntase libre de explorar nuestro %github_link%.
 $about_github_link_text: "**repositorio de GitHub**"
@@ -85,7 +85,7 @@ $about_wallet_community: Claro, bienvenido a nuestro %community_link%.
 $about_community_link_text: "**canal de Telegram**"
 Currency History: Historia del activo
 $add_account_description1: |
-  **MyTonWallet** te permite cambiar sin problemas
+  **DPS Wallet** te permite cambiar sin problemas
   entre **varios monederos**.
 Enter Password: Introduce la contraseña
 Send: Enviar
@@ -284,8 +284,8 @@ Disconnect Dapp: Desconectar Dapp
 Disconnect Dapps: Desconectar Dapps
 Are you sure you want to disconnect?: ¿Estás seguro de que quieres desconectar %dappname%?
 Are you sure you want to disconnect all websites?: ¿Estás seguro de que quieres desconectar todas las dapps?
-$dapps-description: Puede iniciar sesión en dapps compatibles con MyTonWallet. Pueden ver la dirección del monedero, el saldo y solicitar operaciones.
-Logged in with MyTonWallet: Conectado con MyTonWallet
+$dapps-description: Puede iniciar sesión en dapps compatibles con DPS Wallet. Pueden ver la dirección del monedero, el saldo y solicitar operaciones.
+Logged in with DPS Wallet: Conectado con DPS Wallet
 No active connections: No hay conexiones activas
 Other: Otros
 Assets & Activity: Activos & Actividad
@@ -296,7 +296,7 @@ Delete Token: Eliminar token
 Are you sure you want to delete?: ¿Está seguro de que desea eliminar %token%?
 Hide Tokens With No Cost: Ocultar tokens sin costo
 Sort By Cost: Ordenar por costo
-Update MyTonWallet: Actualizar MyTonWallet
+Update DPS Wallet: Actualizar DPS Wallet
 Connect Ledger: Conectar libro mayor
 Connecting to your Ledger...: Conectándose a su libro mayor...
 Failed to connect: Error al conectar
@@ -320,7 +320,7 @@ The time on your device is incorrect, sync it and try again: El tiempo en su dis
 Name or Address...: Nombre o Dirección...
 Such error, many tabs: Tal error, muchas pestañas
 $many_tabs_error_description: |
-  MyTonWallet solo admite una pestaña activa con la aplicación.
+  DPS Wallet solo admite una pestaña activa con la aplicación.
   Vuelva a cargar esta página para continuar usando esta pestaña o ciérrela.
 Reload App: Recargar aplicación
 Please confirm operation on your Ledger: Por favor, confirme la operación en su Ledger
@@ -360,11 +360,11 @@ Slippage too high: Deslizamiento demasiado alto
 Not Enough %symbol%: "%symbol% insuficiente"
 Use Responsibly: Usar responsablemente
 $auth_responsibly_description1: |
-  MyTonWallet es una billetera con **autocustodia**, lo que significa que **solo usted** tiene el control total y, lo que es más importante, la **total responsabilidad** de sus fondos.
+  DPS Wallet es una billetera con **autocustodia**, lo que significa que **solo usted** tiene el control total y, lo que es más importante, la **total responsabilidad** de sus fondos.
 $auth_responsibly_description2: |
   Sus claves privadas se almacenan en su dispositivo y están sujetas a **ataques de piratas informáticos**. Si su computadora está infectada con **malware**, es probable que le roben sus fondos.
 $auth_responsibly_description3: |
-  El equipo de MyTonWallet **no es responsable** de la seguridad de sus fondos, al igual que el fabricante de su computadora o su proveedor de Internet no es responsable.
+  El equipo de DPS Wallet **no es responsable** de la seguridad de sus fondos, al igual que el fabricante de su computadora o su proveedor de Internet no es responsable.
 $auth_responsibly_description4: |
   **Nunca** almacene todos sus fondos en un solo lugar. **Diversificar** y usar varios software y hardware. Siempre **haga su propia investigación** y obtenga más información sobre la criptoseguridad.
 Start Wallet: Iniciar billetera
@@ -627,7 +627,7 @@ New code set successfully: Nuevo código establecido con éxito
 Codes don’t match: Los códigos no coinciden
 Enter your new code: Introduzca su nuevo código
 Re-enter your new code: Introduzca su nuevo código nuevamente
-MyTonWallet Features: Funciones de MyTonWallet
+DPS Wallet Features: Funciones de DPS Wallet
 Install on Desktop: Instalar en el escritorio
 Install on Mobile: Instalar en el móvil
 Install App: Instalar la aplicación

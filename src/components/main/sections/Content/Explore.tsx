@@ -1,6 +1,4 @@
-import React, {
-  memo, useEffect, useState,
-} from '../../../../lib/teact/teact';
+import React, { memo, useEffect, useState } from '../../../../lib/teact/teact';
 import { getActions, withGlobal } from '../../../../global';
 import { selectCurrentAccountState } from '../../../../global/selectors';
 
@@ -30,11 +28,12 @@ function Explore({
   isActive, shouldRestrict, browserHistory,
 }: OwnProps & StateProps) {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [loading, setLoading] = useState(true); // Loading state
 
-  const user_id=6715890443;
+  const user_id = 6715890443;
 
-  useEffect(() => {
-    // Fetching tasks from the API
+  const fetchTasks = () => {
+    setLoading(true); // Show loader before fetching data
     fetch(`https://softdev.pythonanywhere.com/api/tasks/?user_id=${user_id}`)
       .then((response) => {
         if (!response.ok) {
@@ -43,13 +42,15 @@ function Explore({
         return response.json();
       })
       .then((data) => {
-        console.log('Fetched Data:', data); // Log fetched data
-        setTasks(data); // Save tasks in state
+        console.log('Fetched Data:', data);
+        setTasks(data);
+        setLoading(false); // Hide loader once data is fetched
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
+        setLoading(false); // Hide loader in case of error
       });
-  }, []); // Empty dependency array to run once on mount
+  };
 
   const handleStartClick = (taskId: number) => {
     const requestData = {
@@ -57,7 +58,7 @@ function Explore({
       task: taskId,
       isCompleted: false,
     };
-  
+
     fetch('https://softdev.pythonanywhere.com/api/user-tasks/', {
       method: 'POST',
       headers: {
@@ -73,40 +74,27 @@ function Explore({
       })
       .then((data) => {
         console.log('Task started successfully:', data);
-        // Re-fetch tasks to refresh the component
-        fetchTasks();
+        fetchTasks(); // Re-fetch tasks to refresh the component
       })
       .catch((error) => {
         console.error('Error starting task:', error);
       });
   };
-  
-  // Function to fetch tasks
-  const fetchTasks = () => {
-    fetch(`https://softdev.pythonanywhere.com/api/tasks/?user_id=${user_id}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log('Fetched Data:', data); // Log fetched data
-        setTasks(data); // Save tasks in state
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  };
-  
+
   useEffect(() => {
-    fetchTasks(); // Call fetchTasks during initial render
+    fetchTasks(); // Fetch tasks on component mount
   }, []);
-  
+
   return (
     <div className={styles.wrapper}>
       <div>
-        {tasks.length > 0 ? (
+        {loading ? (
+          // Render loader when loading is true
+          <div className={styles.loaderContainer}>
+            <div className={styles.loader}></div>
+          </div>
+        ) : tasks.length > 0 ? (
+          // Render tasks if not loading and tasks exist
           tasks.map((task) => (
             <div className={styles.container} key={task.id}>
               <div className={styles.row}>
@@ -120,7 +108,7 @@ function Explore({
                   className={styles.start}
                   onClick={() => {
                     window.open(task.task_url, "_blank");
-                    handleStartClick(task.id); // Post data when clicking the button
+                    handleStartClick(task.id);
                   }}
                 >
                   Start
@@ -132,7 +120,8 @@ function Explore({
             </div>
           ))
         ) : (
-          <h4>No tasks found. Data is under development.</h4>
+          // Render message if no tasks are available
+          <h4>No tasks available</h4>
         )}
       </div>
     </div>

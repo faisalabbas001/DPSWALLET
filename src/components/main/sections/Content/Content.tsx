@@ -37,7 +37,7 @@ import Explore from './Explore';
 import NftCollectionHeader from './NftCollectionHeader';
 import Nfts from './Nfts';
 import NftSelectionHeader from './NftSelectionHeader';
-
+import Explore2 from './Explore2';
 import styles from './Content.module.scss';
 import P2p from './P2p';
 
@@ -149,10 +149,11 @@ function Content({
           ? [{ id: ContentTab.Assets, title: lang('Assets'), className: styles.tab }]
           : []
       ),
-      { id: ContentTab.Activity, title: lang('Activity'), className: styles.tab },
       { id: ContentTab.Tasks, title: lang('Tasks'), className: styles.tab },
       { id: ContentTab.P2p, title: lang('P2P'), className: styles.tab },
 
+
+      //Tasks  // P2P //  // Activity
     
       {
         id: ContentTab.Nft,
@@ -170,6 +171,7 @@ function Content({
           : nftCollections,
         onMenuItemClick: handleNftsMenuButtonClick,
       },
+      { id: ContentTab.Activity, title: lang('Activity'), className: styles.tab },
       ...(nftCollections.some(({ value }) => value === NOTCOIN_VOUCHERS_ADDRESS) ? [{
         id: ContentTab.NotcoinVouchers,
         title: 'NOT Vouchers',
@@ -280,7 +282,7 @@ function Content({
   function renderCurrentTab(isActive: boolean) {
     // When assets are shown separately, there is effectively no tab with index 0,
     // so we fall back to next tab to not break parent's component logic.
-    if (activeTabIndex === 0 && shouldShowSeparateAssetsPanel) {
+    if (activeTabIndex === 3 && shouldShowSeparateAssetsPanel) {
       return <Activity isActive={isActive} />;
     }
 
@@ -289,13 +291,22 @@ function Content({
     switch (tabs[activeTabIndex].id) {
       case ContentTab.Assets:
         return <Assets isActive={isActive} onTokenClick={handleClickAsset} onStakedTokenClick={onStakedTokenClick} />;
-      case ContentTab.Activity:
-        return <Activity isActive={isActive} />;
-     
-      case ContentTab.Nft:
+
+      // case ContentTab.Activity:
+      //   return <Activity isActive={isActive} />;
+
+      case ContentTab.Tasks:
+        return <Explore isActive={isActive} />;
+      
+        case ContentTab.P2p:
+          return <  Explore2 isActive={isActive} />;
+  
+    
+        case ContentTab.Nft:
        
     
         return (
+          
           <Transition
             activeKey={activeNftKey}
             name={isPortrait ? 'slide' : 'slideFade'}
@@ -304,14 +315,15 @@ function Content({
             <Nfts key={currentCollectionAddress || 'all'} isActive={isActive} />
                     </Transition>
         );
+
+
+        case ContentTab.Activity:
+          return <Activity isActive={isActive} />;
+  
         
+        
+       
     
-
-      case ContentTab.Tasks:
-        return <Explore isActive={isActive} />;
-
-    
-
           
         
       default:

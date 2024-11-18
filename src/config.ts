@@ -4,7 +4,7 @@ import type { LangItem, TokenPeriod } from './global/types';
 
 export const APP_ENV = process.env.APP_ENV;
 
-export const APP_NAME = process.env.APP_NAME || 'MyTonWallet';
+export const APP_NAME = process.env.APP_NAME || 'DPS Wallet';
 export const APP_VERSION = process.env.APP_VERSION!;
 export const APP_ENV_MARKER = APP_ENV === 'staging' ? 'Beta' : APP_ENV === 'development' ? 'Dev' : undefined;
 

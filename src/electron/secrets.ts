@@ -11,7 +11,7 @@ export function setupSecrets() {
   });
   ipcMain.handle(ElectronAction.DECRYPT_PASSWORD, async (e, encrypted: string) => {
     try {
-      await systemPreferences.promptTouchID('confirm an operation in MyTonWallet');
+      await systemPreferences.promptTouchID('confirm an operation in DPS Wallet');
       return safeStorage.decryptString(Buffer.from(encrypted, 'base64'));
     } catch (err) {
       return undefined;

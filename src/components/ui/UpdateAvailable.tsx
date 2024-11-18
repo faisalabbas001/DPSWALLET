@@ -32,7 +32,7 @@ function UpdateAvailable({ isAppUpdateAvailable, newAppVersion }: StateProps) {
   return (
     <button type="button" className={buildClassName(styles.wrapper, transitionClassNames)} onClick={handleClick}>
       <i className={buildClassName('icon icon-download-filled', styles.icon)} aria-hidden />
-      {lang('Update MyTonWallet')}
+      {lang('Update DPS Wallet')}
     </button>
   );
 }

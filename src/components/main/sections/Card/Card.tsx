@@ -156,7 +156,7 @@ function Card({
               {shortBaseSymbol.length > 1 && (
                 <span className={styles.primaryFractionPart}>
                 &nbsp;{shortBaseSymbol}
-                </span>
+                </span> 
               )}
               <i className={iconCaretClassNames} aria-hidden />
             </span>
@@ -167,7 +167,7 @@ function Card({
         <CurrencySwitcher isOpen={isCurrencyMenuOpen} onClose={closeCurrencyMenu} />
         {primaryValue !== '0' && (
           <div className={buildClassName(styles.change, changeClassName)}>
-            {changePrefix}
+            {changePrefix} 
             &thinsp;
             <AnimatedCounter text={`${Math.abs(changePercent!)}%`} />
             {' · '}
@@ -191,7 +191,8 @@ function Card({
             {renderingDappDomain}
           </div>
         )}
-        {values ? renderBalance() : renderLoader()}
+        {values ? renderBalance() : renderLoader()} 
+      
         <CardAddress />
       </div>
       {shouldRenderTokenCard && (

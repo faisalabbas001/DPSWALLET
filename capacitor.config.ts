@@ -3,12 +3,12 @@ import type { CapacitorConfig } from '@capacitor/cli';
 const { APP_ENV = 'production' } = process.env;
 
 const config: CapacitorConfig = {
-  appId: 'org.mytonwallet.app',
-  appName: 'MyTonWallet',
+  appId: 'org.DPS Wallet.app',
+  appName: 'DPS Wallet',
   webDir: 'dist',
   server: {
     androidScheme: 'https',
-    hostname: 'mytonwallet.local',
+    hostname: 'DPS Wallet.local',
   },
   android: {
     path: 'mobile/android',
@@ -34,7 +34,7 @@ const config: CapacitorConfig = {
   },
   ios: {
     path: 'mobile/ios',
-    scheme: 'MyTonWallet',
+    scheme: 'DPS Wallet',
     webContentsDebuggingEnabled: APP_ENV !== 'production',
   },
   plugins: {

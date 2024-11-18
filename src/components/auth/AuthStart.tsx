@@ -65,7 +65,7 @@ function AuthStart({ hasAccounts, isLoading, theme }: StateProps) {
         className={buildClassName(styles.btn, styles.btn_about)}
         onClick={openAbout}
       >
-        {lang('More about MyTonWallet')}
+        {lang('More about DPS Wallet')}
         <i className="icon-chevron-right" aria-hidden />
       </Button>
       <div className={styles.importButtonsBlock}>

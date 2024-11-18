@@ -236,10 +236,10 @@ export enum ActiveTab {
 
 export enum ContentTab {
   Assets,
-  Activity,
   Tasks,
   Nft,
   P2p,
+  Activity,
   NotcoinVouchers,
 
 }

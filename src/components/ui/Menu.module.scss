@@ -54,7 +54,8 @@
   }
 
   &.left {
-    left: var(--offset-x-value, var(--offset-x));
+    right: var(--offset-x-value, var(--offset-x));
+    margin-top: 8px;
   }
 
   &.right {

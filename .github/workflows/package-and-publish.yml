@@ -19,7 +19,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  APP_NAME: MyTonWallet
+  APP_NAME: DPS Wallet
   PROXY_HOSTS: ${{ vars.PROXY_HOSTS }}
   STAKING_POOLS: ${{ vars.STAKING_POOLS }}
   PUBLISH_REPO: ${{ vars.PUBLISH_REPO }}
@@ -346,7 +346,7 @@ jobs:
       - name: Calculate sha256 hashes
         run: |
           mkdir release
-          mv */*.dmg MyTonWallet-x64.exe/MyTonWallet-x64.exe */*.AppImage */*.apk release/
+          mv */*.dmg DPS Wallet-x64.exe/mytonWallet-x64.exe */*.AppImage */*.apk release/
           sha256sum release/* >${{ env.HASH_FILENAME }}
 
       - name: Upload hash artifact

@@ -34,7 +34,7 @@ export function createWindow() {
     minHeight: 690,
     width: windowState.width,
     height: windowState.height,
-    title: 'MyTonWallet',
+    title: 'DPS Wallet',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       devTools: !IS_PRODUCTION,

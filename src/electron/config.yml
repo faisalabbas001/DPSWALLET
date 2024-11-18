@@ -1,9 +1,9 @@
-productName: "MyTonWallet"
+productName: "DPS Wallet"
 artifactName: "${productName}-${arch}.${ext}"
 appId: "io.mytonwallet.electron"
 extraMetadata:
   main: "./dist/electron.js"
-  productName: "MyTonWallet"
+  productName: "DPS Wallet"
 files:
   - "dist"
   - "package.json"
@@ -21,14 +21,14 @@ protocols:
     schemes: ["ton"]
   - name: "TonConnect"
     schemes: ["tc"]
-  - name: "TonConnect MyTonWallet"
-    schemes: ["mytonwallet-tc"]
-  - name: "MyTonWallet"
+  - name: "TonConnect DPS Wallet"
+    schemes: ["DPS Wallet-tc"]
+  - name: "DPS Wallet"
     schemes: ["mtw"]
 publish:
   provider: "github"
-  owner: "mytonwalletorg"
-  repo: "mytonwallet"
+  owner: "DPS Wallet"
+  repo: "DPS Wallet"
   releaseType: "draft"
 win:
   target: "nsis"
@@ -45,7 +45,7 @@ mac:
   icon: "public/icon-electron-macos.icns"
 
 dmg:
-  title: "MyTonWallet installer"
+  title: "DPS Wallet installer"
   background: "public/background-electron-dmg.tiff"
   contents:
     - x: 148

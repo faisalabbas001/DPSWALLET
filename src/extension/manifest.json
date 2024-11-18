@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "MyTonWallet · My TON Wallet",
+  "name": "DPS Wallet · My TON Wallet",
   "description": "The most feature-rich TON extension – with support of multi-accounts, tokens, NFT, TON DNS, TON Sites, TON Proxy, and TON Magic.",
   "version": "%%SET BY WEBPACK%%",
   "icons": {
@@ -9,7 +9,7 @@
     "512": "icon-512x512.png"
   },
   "action": {
-    "default_title": "MyTonWallet"
+    "default_title": "DPS Wallet"
   },
   "permissions": [
     "webRequest",

@@ -3,7 +3,7 @@ $auth_intro: |
   並享有**光速的**區塊鏈支付速度。
 Create New Wallet: 創建新錢包
 Import From %1$d Secret Words: 輸入註記詞
-More about MyTonWallet: 更多關於 MyTonWallet
+More about DPS Wallet: 更多關於 DPS Wallet
 Creating Wallet...: 錢包創建中...
 On the count of three...: 數到三...
 Back Up: 備份
@@ -72,8 +72,8 @@ More info and demo.: 更多資訊和範例.
 $about_extension_description2: TON Magic 透過修補官方 Telegram Web 應用程序來整合原生 Telegram。
 $about_extension_description3: 打開它，將可以從任何 Telegram 用戶發送和接收 Toncoins.
 $about_proxy_magic_title: What about %ninja% TON Proxy and %unicorn% TON Magic?
-$about_proxy_magic_description: 要享受去中心化網路、瀏覽 TON Site並使用 Telegram Web，請安裝 MyTonWallet 擴展程序
-$about_extension_link_text: "**MyTonWallet 擴展程序**"
+$about_proxy_magic_description: 要享受去中心化網路、瀏覽 TON Site並使用 Telegram Web，請安裝 DPS Wallet 擴展程序
+$about_extension_link_text: "**DPS Wallet 擴展程序**"
 Is it open source?: 它是開源的嗎？
 $about_wallet_github: 是的，歡迎查看我們的 %github_link%
 $about_github_link_text: "**GitHub repository**"
@@ -82,7 +82,7 @@ $about_wallet_community: 當然，歡迎來到我們的社群 %community_link%.
 $about_community_link_text: "**Telegram 頻道**"
 Currency History: 代幣歷史記錄
 $add_account_description1: |
-  **MyTonWallet** 讓您無縫在**多帳戶間**自由轉換。
+  **DPS Wallet** 讓您無縫在**多帳戶間**自由轉換。
 Enter Password: 輸入密碼
 Send: 發送
 Add Wallet: 新增錢包
@@ -274,8 +274,8 @@ Disconnect Dapp: 斷開 Dapp
 Disconnect Dapps: 斷開 Dapps
 Are you sure you want to disconnect?: 你確定要斷開 %dappname% 嗎？
 Are you sure you want to disconnect all websites?: 您確定要斷開所有網站嗎？
-$dapps-description: 您可以登錄支持 MyTonWallet 的 dapp。 它們可以查看錢包地址、餘額並請求操作。
-Logged in with MyTonWallet: 使用 MyTonWallet 登錄
+$dapps-description: 您可以登錄支持 DPS Wallet 的 dapp。 它們可以查看錢包地址、餘額並請求操作。
+Logged in with DPS Wallet: 使用 DPS Wallet 登錄
 No active connections: 沒有活動連接
 Other: 其他的
 Assets & Activity: 資產 & 活動紀錄
@@ -286,7 +286,7 @@ Delete Token: 刪除令牌
 Are you sure you want to delete?: 您確定要刪除 %token% 嗎？
 Hide Tokens With No Cost: 無需掩蓋令牌
 Sort By Cost: 按成本排序
-Update MyTonWallet: 更新 MyTonWallet
+Update DPS Wallet: 更新 DPS Wallet
 Connect Ledger: 連接賬本
 Connecting to your Ledger...: 連接到您的分類帳...
 Failed to connect: 連接失敗
@@ -310,7 +310,7 @@ The time on your device is incorrect, sync it and try again: 您設備上的時�
 Name or Address...: 姓名或地址...
 Such error, many tabs: 這樣的錯誤，很多標籤
 $many_tabs_error_description: |
-  MyTonWallet 僅支持該應用程序的一個活動選項卡。
+  DPS Wallet 僅支持該應用程序的一個活動選項卡。
   請重新加載此頁面以繼續使用此選項卡或將其關閉。
 Reload App: 重新加載應用程序
 Please confirm operation on your Ledger: 請確認您在Ledger上的操作
@@ -350,11 +350,11 @@ Slippage too high: 下單誤差過高
 Not Enough %symbol%: "%symbol% 不足"
 Use Responsibly: 負責任地使用
 $auth_responsibly_description1: |
-  MyTonWallet 是一個**自我託管**錢包，這意味著**只有您**擁有完全控制權，最重要的是，對您的資金**承擔全部責任**。
+  DPS Wallet 是一個**自我託管**錢包，這意味著**只有您**擁有完全控制權，最重要的是，對您的資金**承擔全部責任**。
 $auth_responsibly_description2: |
   您的私鑰存儲在您的設備上，並且容易受到**黑客攻擊**。 如果您的計算機感染了**惡意軟件**，您的資金可能會被盜。
 $auth_responsibly_description3: |
-  MyTonWallet 團隊對您的資金安全**不負責**，就像您的計算機製造商或互聯網提供商不負責一樣。
+  DPS Wallet 團隊對您的資金安全**不負責**，就像您的計算機製造商或互聯網提供商不負責一樣。
 $auth_responsibly_description4: |
   **永遠不要**將您的所有資金存儲在一個地方。 **多樣化**並使用各種軟件和硬件。 始終**進行自己的研究**並了解有關加密安全的更多信息。
 Start Wallet: 啟動錢包
@@ -615,7 +615,7 @@ New code set successfully: 新代碼設定成功
 Codes don’t match: 代碼不匹配
 Enter your new code: 輸入您的新代碼
 Re-enter your new code: 再次輸入您的新代碼
-MyTonWallet Features: MyTonWallet 功能
+DPS Wallet Features: DPS Wallet 功能
 Install on Desktop: 安裝在桌面
 Install on Mobile: 安裝在手機
 Install App: 安裝應用程式

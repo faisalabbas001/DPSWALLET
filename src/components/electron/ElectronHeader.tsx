@@ -45,7 +45,7 @@ function ElectronHeader({ children, withTitle }: Props) {
         <div className={styles.wrapper}>
           {Boolean(children) && <div className={styles.buttons}>{children}</div>}
 
-          {withTitle && <div className={styles.applicationName}>MyTonWallet</div>}
+          {withTitle && <div className={styles.applicationName}>DPS Wallet</div>}
         </div>
 
         <div className={styles.windowsButtons}>
@@ -70,7 +70,7 @@ function ElectronHeader({ children, withTitle }: Props) {
   return (
     <div ref={containerRef} className={styles.container} onDoubleClick={handleDoubleClick}>
       <div className={styles.wrapper}>
-        {withTitle && <div className={styles.applicationName}>MyTonWallet</div>}
+        {withTitle && <div className={styles.applicationName}>DPS Wallet</div>}
 
         <div className={styles.buttons}>
           <UpdateApp />

@@ -125,7 +125,7 @@ function App({
   useEffect(() => {
     updateSizes();
     setActiveTabChangeListener(() => {
-      document.title = `MyTonWallet ${INACTIVE_MARKER}`;
+      document.title = `DPS Wallet ${INACTIVE_MARKER}`;
 
       markInactive();
       closeSettings();

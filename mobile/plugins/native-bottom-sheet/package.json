@@ -13,7 +13,7 @@
     "ios/Plugin/",
     "NativeBottomSheet.podspec"
   ],
-  "author": "MyTonWallet Team",
+  "author": "DPS Wallet Team",
   "license": "MIT",
   "repository": {
     "type": "git",

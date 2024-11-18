@@ -4,7 +4,7 @@ $auth_intro: |
   at the **speed of light**.
 Create New Wallet: Create New Wallet
 Import From %1$d Secret Words: Import From %1$d Secret Words
-More about MyTonWallet: More about MyTonWallet
+More about DPS Wallet: More about DPS Wallet
 Creating Wallet...: Creating Wallet...
 On the count of three...: On the count of three...
 Back Up: Back Up
@@ -76,7 +76,7 @@ $about_extension_description2: TON Magic provides native **Telegram integration*
 $about_extension_description3: Turn it on to send and receive Toncoins from any Telegram user.
 $about_proxy_magic_title: What about %ninja% TON Proxy and %unicorn% TON Magic?
 $about_proxy_magic_description: To enjoy **decentralized internet**, access **TON Sites**, and leverage native **Telegram integration**, feel free to install the %extension_link%.
-$about_extension_link_text: "**MyTonWallet extension**"
+$about_extension_link_text: "**DPS Wallet extension**"
 Is it open source?: Is it open source?
 $about_wallet_github: Yes, it is. Feel free to explore our %github_link%.
 $about_github_link_text: "**GitHub repository**"
@@ -85,7 +85,7 @@ $about_wallet_community: Sure, welcome to our %community_link%.
 $about_community_link_text: "**Telegram channel**"
 Currency History: Currency History
 $add_account_description1: |
-  **MyTonWallet** allows you to seamlessly
+  **DPS Wallet** allows you to seamlessly
   switch between **multiple accounts**.
 Enter Password: Enter Password
 Send: Send
@@ -283,8 +283,8 @@ Disconnect Dapp: Disconnect Dapp
 Disconnect Dapps: Disconnect Dapps
 Are you sure you want to disconnect?: Are you sure you want to disconnect %dappname%?
 Are you sure you want to disconnect all websites?: Are you sure you want to disconnect all websites?
-$dapps-description: You can log in on dapps that support MyTonWallet. They can view wallet address, balance, and request operations.
-Logged in with MyTonWallet: Logged in with MyTonWallet
+$dapps-description: You can log in on dapps that support DPS Wallet. They can view wallet address, balance, and request operations.
+Logged in with DPS Wallet: Logged in with DPS Wallet
 No active connections: No active connections
 Other: Other
 Assets & Activity: Assets & Activity
@@ -295,7 +295,7 @@ Delete Token: Delete Token
 Are you sure you want to delete?: Are you sure you want to delete %token%?
 Hide Tokens With No Cost: Hide Tokens With No Cost
 Sort By Cost: Sort By Cost
-Update MyTonWallet: Update MyTonWallet
+Update DPS Wallet: Update DPS Wallet
 Connect Ledger: Connect Ledger
 Connecting to your Ledger...: Connecting to your Ledger...
 Failed to connect: Failed to connect
@@ -319,7 +319,7 @@ The time on your device is incorrect, sync it and try again: The time on your de
 Name or Address...: Name or Address...
 Such error, many tabs: Such error, many tabs
 $many_tabs_error_description: |
-  MyTonWallet supports only one active tab with the app.
+  DPS Wallet supports only one active tab with the app.
   Please reload this page to continue using this tab or close it.
 Reload App: Reload App
 Please confirm operation on your Ledger: Please confirm operation on your Ledger
@@ -359,11 +359,11 @@ Slippage too high: Slippage too high
 Not Enough %symbol%: Not Enough %symbol%
 Use Responsibly: Use Responsibly
 $auth_responsibly_description1: |
-  MyTonWallet is a **self-custodial** wallet, which means that **only you** have full control and, most importantly, **full responsibility** for your funds.
+  DPS Wallet is a **self-custodial** wallet, which means that **only you** have full control and, most importantly, **full responsibility** for your funds.
 $auth_responsibly_description2: |
   Your private keys are stored on your device and are subject to **hacker attacks**. If your computer is infected with **malware**, your funds are likely to be stolen.
 $auth_responsibly_description3: |
-  The MyTonWallet team is **not responsible** for the safety of your funds, just as your computer manufacturer or internet provider is not responsible.
+  The DPS Wallet team is **not responsible** for the safety of your funds, just as your computer manufacturer or internet provider is not responsible.
 $auth_responsibly_description4: |
   **Never** store all your funds in one place. **Diversify** and use various software and hardware. Always **do your own research** and learn more about crypto security.
 Start Wallet: Start Wallet
@@ -628,7 +628,7 @@ New code set successfully: New code set successfully
 Codes don’t match: Codes don’t match
 Enter your new code: Enter your new code
 Re-enter your new code: Re-enter your new code
-MyTonWallet Features: MyTonWallet Features
+DPS Wallet Features: DPS Wallet Features
 Install on Desktop: Install on Desktop
 Install on Mobile: Install on Mobile
 Install App: Install App

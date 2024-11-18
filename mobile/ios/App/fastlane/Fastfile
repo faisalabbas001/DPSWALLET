@@ -33,7 +33,7 @@ platform :ios do
     update_code_signing_settings(
       path: "App.xcodeproj",
       use_automatic_signing: false,
-      profile_name: "MyTonWallet Production profile",
+      profile_name: "DPS Wallet Production profile",
       build_configurations: ["Debug"],
       sdk: "iphoneos*",
       team_id: "Y54Z4K69Z9",
@@ -46,11 +46,11 @@ platform :ios do
 
     build_app(
       workspace: "App.xcworkspace",
-      scheme: "MyTonWallet",
+      scheme: "DPS Wallet",
       export_method: "app-store",
       export_options: {
         provisioningProfiles: {
-          "org.mytonwallet.app" => "MyTonWallet Production profile",
+          "org.DPS Wallet.app" => "DPS Wallet Production profile",
         }
       }
     )
@@ -71,11 +71,11 @@ platform :ios do
 
     build_app(
       workspace: "App.xcworkspace",
-      scheme: "MyTonWallet",
+      scheme: "DPS Wallet",
       export_method: "app-store",
       export_options: {
         provisioningProfiles: {
-          "org.mytonwallet.app" => "MyTonWallet Production profile",
+          "org.mytonwallet.app" => "DPS Wallet Production profile",
         }
       }
     )

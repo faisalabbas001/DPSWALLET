@@ -6,7 +6,7 @@ const BRIDGE_URL = 'https://tonconnectbridge.mytonwallet.org/bridge';
 const CAPTCHA_KEY = '0x4AAAAAAAWP-ib_cL3bojOS';
 
 const REF_LINK_PREFIX = 'https://my.tt/r/';
-const BOT_USERNAME = 'MyTonWalletBot';
+const BOT_USERNAME = 'DPS Wallet';
 
 let captchaLoadedResolve = undefined;
 let captchaLoadedPromise = new Promise((resolve) => {
@@ -61,7 +61,7 @@ async function connect() {
 }
 
 async function handleConnectorStatusChange(walletInfo) {
-  if (walletInfo?.device?.appName !== 'MyTonWallet') {
+  if (walletInfo?.device?.appName !== 'DPS Wallet') {
     connect();
     return;
   }

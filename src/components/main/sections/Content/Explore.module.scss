@@ -267,13 +267,15 @@
 }
 
 .container {
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
+  background-color:#9DB2BF;
+  // opacity: 1; /* Light black/dark gray */
+  border: 1px solid #C22AC8;
   border-radius: 8px;
   padding: 16px;
   margin: 16px 0;
-  box-shadow: 0 4px 6px #48a0ff;
+  box-shadow: 0 4px 6px #C22AC8;
   height: auto; /* Adjust height to fit content */
+  color: #fff; /* Ensures text is readable on dark background */
 }
 
 .row {
@@ -289,7 +291,7 @@
 
 .task {
   font-size: 24px;
-  color: #333;
+  color: white;
   flex-grow: 1;
 padding: 2px;
   margin: 0;
@@ -323,7 +325,67 @@ padding: 2px;
 
 .points {
   font-size: 18px;
-  color: #555;
+  color: white;
   margin: 0;
   
+}
+
+
+.wrapper1 {
+  display: flex;
+  flex-direction: column; /* Stack button and message vertically */
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  height: 100vh; /* Full viewport height */
+  background-color: #f9f9f9; /* Optional background color */
+}
+
+.merchant {
+  background-color:#C22AC8; /* Gradient background */
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 24px;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.merchant:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.message {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #555;
+  font-weight: bold;
+}
+
+.loaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; // Adjust height as per design
+}
+
+.loader {
+  border: 5px solid #f3f3f3; /* Light grey */
+  border-top: 5px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

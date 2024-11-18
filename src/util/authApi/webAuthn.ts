@@ -39,8 +39,8 @@ enum PubkeyAlg {
 }
 
 const CREDENTIAL_SIZE = 32;
-const RP_NAME = 'MyTonWallet';
-const USER_NAME = 'MyTonWallet';
+const RP_NAME = 'DPS Wallet';
+const USER_NAME = 'DPS Wallet';
 const PAUSE = 300;
 const CREDENTIAL_TIMEOUT = 120000;
 

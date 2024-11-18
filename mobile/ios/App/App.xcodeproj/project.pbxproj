@@ -117,7 +117,7 @@
 			);
 			dependencies = (
 			);
-			name = MyTonWallet;
+			name = DPS Wallet;
 			productName = App;
 			productReference = 504EC3041FED79650016851F /* MyTonWallet.app */;
 			productType = "com.apple.product-type.application";
