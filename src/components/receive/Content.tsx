@@ -115,7 +115,8 @@ function Content({
 export default memo(
   withGlobal<OwnProps>((global): StateProps => {
     const account = selectAccount(global, global.currentAccountId!);
-
+  
+     
     return {
       addressByChain: account?.addressByChain,
       isLedger: Boolean(account?.ledger),

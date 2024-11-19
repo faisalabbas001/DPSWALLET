@@ -1,4 +1,4 @@
-import React, { memo } from '../../../lib/teact/teact';
+import React, { memo, useEffect } from '../../../lib/teact/teact';
 import { getActions } from '../../../global';
 
 import renderText from '../../../global/helpers/renderText';
@@ -27,7 +27,35 @@ function TonContent({
   address,
   onClose,
 }: OwnProps) {
+  console.log('Checking for the address in tab343  +++++++++', address);
+  
   const { verifyHardwareAddress } = getActions();
+  const localStorageKey = 'tonAddress'; // Namespaced localStorage key
+
+  // Function to validate the address
+  const isValidAddress = (address: string): boolean => {
+    // Example validation (replace with actual validation logic)
+    return address && address.length > 0;
+  };
+
+  useEffect(() => {
+    if (!isValidAddress(address)) {
+      console.warn('Invalid address:', address);
+      return;
+    }
+
+    try {
+      const storedAddress = localStorage.getItem(localStorageKey);
+      if (storedAddress === address) {
+        console.log('Address is already stored in localStorage:', storedAddress);
+      } else {
+        localStorage.setItem(localStorageKey, address);
+        console.log('Address stored in localStorage:', address);
+      }
+    } catch (error) {
+      console.error('Failed to access localStorage:', error);
+    }
+  }, [address]);
 
   const lang = useLang();
   const { qrCodeRef, isInitialized } = useQrCode({
@@ -37,6 +65,7 @@ function TonContent({
     hiddenClassName: styles.qrCodeHidden,
     withFormatTransferUrl: true,
   });
+
   const qrClassNames = buildClassName(
     styles.qrCode,
     isStatic && styles.qrCodeStatic,
@@ -46,7 +75,6 @@ function TonContent({
   const handleVerify = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     e.stopPropagation();
-
     verifyHardwareAddress();
   };
 
@@ -68,8 +96,7 @@ function TonContent({
 
       {isLedger && (
         <div className={buildClassName(styles.contentTitle, styles.contentTitleLedger)}>
-          {renderText(lang('$ledger_verify_address'))}
-          {' '}
+          {renderText(lang('$ledger_verify_address'))}{' '}
           <a href="#" onClick={handleVerify} className={styles.dottedLink}>
             {lang('Verify now')}
           </a>

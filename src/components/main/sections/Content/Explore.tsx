@@ -30,11 +30,37 @@ function Explore({
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true); // Loading state
 
-  const user_id = 6715890443;
+
+  // useEffect(() => {
+  //   console.log("Fetching address...");
+  //   const storedAddress = localStorage.getItem("tonAddress");
+  //   console.log("Address fetched:", storedAddress);
+  // }, []);
+  
+ 
+
+
+  const [userAddress, setUserAddress] = useState<string | null>(null); // State for address
+
+  // Fetch address from localStorage
+  useEffect(() => {
+    const storedAddress = localStorage.getItem("tonAddress");
+    if (storedAddress) {
+      console.log('Address found in localStorage:', storedAddress);
+      setUserAddress(storedAddress);
+    } else {
+      console.log('No address found in localStorage.');
+    }
+  }, []);
 
   const fetchTasks = () => {
+    if (!userAddress) {
+      console.error('User address is missing. Cannot fetch tasks.');
+      return;
+    }
+
     setLoading(true); // Show loader before fetching data
-    fetch(`https://softdev.pythonanywhere.com/api/tasks/?user_id=${user_id}`)
+    fetch(`https://softdev.pythonanywhere.com/api/tasks/?user_id=${userAddress}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -52,9 +78,16 @@ function Explore({
       });
   };
 
+  // console.log("checking for the address of task file ",userAddress)
+
   const handleStartClick = (taskId: number) => {
+    if (!userAddress) {
+      console.error('User address is missing. Cannot start task.');
+      return;
+    }
+
     const requestData = {
-      user: user_id,
+      user:userAddress, // Use the address in place of user_id
       task: taskId,
       isCompleted: false,
     };
@@ -82,8 +115,13 @@ function Explore({
   };
 
   useEffect(() => {
-    fetchTasks(); // Fetch tasks on component mount
-  }, []);
+    if (userAddress) {
+      fetchTasks(); // Fetch tasks only if userAddress is available
+    }
+  }, [userAddress]);
+
+
+  console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&",userAddress)
 
   return (
     <div className={styles.wrapper}>
@@ -107,7 +145,7 @@ function Explore({
                 <button
                   className={styles.start}
                   onClick={() => {
-                    window.open(task.task_url, "_blank");
+                    window.open(task.task_url, '_blank');
                     handleStartClick(task.id);
                   }}
                 >
