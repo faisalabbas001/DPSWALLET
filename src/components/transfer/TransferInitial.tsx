@@ -14,7 +14,7 @@ import { TransferState } from '../../global/types';
 import {
   IS_FIREFOX_EXTENSION, STARS_SYMBOL, TONCOIN, TRX,
 } from '../../config';
-import { Big } from '../../lib/big.js';
+import { Big } from '../../lib/big.js/index.js';
 import renderText from '../../global/helpers/renderText';
 import {
   selectCurrentAccountState,

@@ -1,5 +1,5 @@
 import { Crypto } from '@peculiar/webcrypto';
-import { Buffer } from 'buffer/';
+import { Buffer } from 'buffer';
 
 import '@testing-library/jest-dom';
 

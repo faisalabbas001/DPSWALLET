@@ -16,7 +16,7 @@ import {
   STAKING_CYCLE_DURATION_MS,
   TONCOIN,
 } from '../../config';
-import { Big } from '../../lib/big.js';
+import { Big } from '../../lib/big.js/index.js';
 import {
   selectAccountState,
   selectCurrentAccountState,

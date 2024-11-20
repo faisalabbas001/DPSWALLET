@@ -1,7 +1,7 @@
 import type { UserToken } from '../../../../../global/types';
 
 import { TONCOIN } from '../../../../../config';
-import { Big } from '../../../../../lib/big.js';
+import { Big } from '../../../../../lib/big.js/index.js';
 import { calcBigChangeValue } from '../../../../../util/calcChangeValue';
 import { toBig } from '../../../../../util/decimals';
 import { formatInteger } from '../../../../../util/formatNumber';

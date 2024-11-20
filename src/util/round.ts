@@ -1,6 +1,6 @@
-import type { RoundingMode } from '../lib/big.js';
+import type { RoundingMode } from '../lib/big.js/index.js';
 
-import { Big } from '../lib/big.js';
+import { Big } from '../lib/big.js/index.js';
 
 export function round(value: number | string, precision = 0, roundingMode: RoundingMode = Big.roundHalfUp) {
   const bn = new Big(value);

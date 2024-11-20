@@ -1,7 +1,7 @@
 import type { ApiSwapAsset } from '../../api/types';
 
 import { TONCOIN } from '../../config';
-import { Big } from '../../lib/big.js';
+import { Big } from '../../lib/big.js/index.js';
 import { formatInteger } from '../formatNumber';
 
 const BTC = new Set(['jWBTC', 'oWBTC', 'BTC']);

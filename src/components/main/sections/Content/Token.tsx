@@ -4,7 +4,7 @@ import type { ApiBaseCurrency } from '../../../../api/types';
 import type { AppTheme, UserToken } from '../../../../global/types';
 
 import { ANIMATED_STICKER_TINY_ICON_PX, TOKEN_WITH_LABEL, TONCOIN } from '../../../../config';
-import { Big } from '../../../../lib/big.js';
+import { Big } from '../../../../lib/big.js/index.js';
 import buildClassName from '../../../../util/buildClassName';
 import { calcChangeValue } from '../../../../util/calcChangeValue';
 import { formatFullDay } from '../../../../util/dateFormat';

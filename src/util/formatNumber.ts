@@ -6,7 +6,7 @@ import {
   TONCOIN,
   WHOLE_PART_DELIMITER,
 } from '../config';
-import { Big } from '../lib/big.js';
+import { Big } from '../lib/big.js/index.js';
 import { toDecimal } from './decimals';
 import withCache from './withCache';
 

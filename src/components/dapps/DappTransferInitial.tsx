@@ -8,7 +8,7 @@ import type { ApiBaseCurrency, ApiDapp, ApiDappTransfer } from '../../api/types'
 import type { Account, UserToken } from '../../global/types';
 
 import { SHORT_FRACTION_DIGITS } from '../../config';
-import { Big } from '../../lib/big.js';
+import { Big } from '../../lib/big.js/index.js';
 import { selectCurrentAccountTokens, selectNetworkAccounts } from '../../global/selectors';
 import buildClassName from '../../util/buildClassName';
 import { toDecimal } from '../../util/decimals';

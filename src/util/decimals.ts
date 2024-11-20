@@ -1,5 +1,5 @@
 import { TONCOIN } from '../config';
-import { Big } from '../lib/big.js';
+import { Big } from '../lib/big.js/index.js';
 
 Big.RM = 0; // RoundDown
 Big.NE = -100000; // Disable exponential form

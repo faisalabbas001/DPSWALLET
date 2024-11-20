@@ -29,7 +29,7 @@ import {
   TRX,
   TRX_SWAP_COUNT_FEE_ADDRESS,
 } from '../../../config';
-import { Big } from '../../../lib/big.js';
+import { Big } from '../../../lib/big.js/index.js';
 import { vibrateOnError, vibrateOnSuccess } from '../../../util/capacitor';
 import { getChainConfig } from '../../../util/chain';
 import {
