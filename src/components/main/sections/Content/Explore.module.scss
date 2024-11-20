@@ -267,7 +267,9 @@
 }
 
 .container {
-  background-color:#9DB2BF;
+  background-color:#E4E4E4 ;
+   
+   
   // opacity: 1; /* Light black/dark gray */
   border: 1px solid #C22AC8;
   border-radius: 8px;
@@ -291,7 +293,7 @@
 
 .task {
   font-size: 24px;
-  color: white;
+  color: black;
   flex-grow: 1;
 padding: 2px;
   margin: 0;
@@ -318,14 +320,14 @@ padding: 2px;
   display: flex;
    justify-items: center;
    justify-content:end;
-   
+   color:black
  
   /* Adjusted to give some space above */
 }
 
 .points {
   font-size: 18px;
-  color: white;
+  color: black;
   margin: 0;
   
 }

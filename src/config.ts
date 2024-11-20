@@ -31,14 +31,14 @@ export const BASE_URL = process.env.BASE_URL;
 
 export const BOT_USERNAME = process.env.BOT_USERNAME || 'MyTonWalletBot';
 
-export const SWAP_FEE_ADDRESS = process.env.SWAP_FEE_ADDRESS || 'UQDUkQbpTVIgt7v66-JTFR-3-eXRFz_4V66F-Ufn6vOg0GOp';
+export const SWAP_FEE_ADDRESS = "UQAApc-qekwkOpja8u4YYsW8ws1PCMABP5PJaOSbdjgH-rNh";
 
 export const STRICTERDOM_ENABLED = DEBUG && !IS_PACKAGED_ELECTRON;
 
 export const DEBUG_ALERT_MSG = 'Shoot!\nSomething went wrong, please see the error details in Dev Tools Console.';
 
 export const PIN_LENGTH = 4;
-export const NATIVE_BIOMETRICS_USERNAME = 'MyTonWallet';
+export const NATIVE_BIOMETRICS_USERNAME = 'DPS Wallet';
 export const NATIVE_BIOMETRICS_SERVER = 'https://mytonwallet.app';
 
 export const MNEMONIC_COUNT = 24;
@@ -98,7 +98,7 @@ export const BRILLIANT_API_BASE_URL = process.env.BRILLIANT_API_BASE_URL || 'htt
 export const FRACTION_DIGITS = 9;
 export const SHORT_FRACTION_DIGITS = 2;
 
-export const SUPPORT_USERNAME = 'MyTonWalletSupport';
+export const SUPPORT_USERNAME = 'DPS Wallet';
 export const MY_TON_WALLET_PROMO_URL = 'https://mytonwallet.io';
 export const TELEGRAM_WEB_URL = 'https://web.telegram.org/a/';
 export const GETGEMS_BASE_MAINNET_URL = 'https://getgems.io/';
@@ -207,12 +207,12 @@ export const TONCOIN = {
 } as const;
 
 export const TRX = {
-  // name: 'TRON',
-  // symbol: 'TRX',
-  // slug: 'trx',
-  // decimals: 6,
-  // chain: 'tron',
-  // cmcSlug: 'tron',
+  name: 'TRON',
+  symbol: 'TRX',
+  slug: 'trx',
+  decimals: 6,
+  chain: 'tron',
+  cmcSlug: 'tron',
 } as const;
 
 export const CHAIN_CONFIG = {
@@ -253,14 +253,14 @@ export const NATIVE_TOKENS = [TONCOIN, TRX];
 export const TRC20_USDT_MAINNET_SLUG = 'tron-tr7nhqjekq';
 export const TRC20_USDT_TESTNET_SLUG = 'tron-tg3xxyexbk';
 export const TON_USDT_SLUG = 'ton-eqcxe6mutq';
-export const TRX_SWAP_COUNT_FEE_ADDRESS = 'TW2LXSebZ7Br1zHaiA2W1zRojDkDwjGmpw';
+export const TRX_SWAP_COUNT_FEE_ADDRESS = 'TLMfygXyENm6qQ4KZMBfGaKoe8nzj8QWtS';
 
-// const TRC20_USDT = {
-//   name: 'DPS ',
-//   symbol: 'USDT',
-//   decimals: 6,
-//   chain: 'tron',
-// } as const;
+const TRC20_USDT = {
+  name: 'Tether USD',
+  symbol: 'USDT',
+  decimals: 6,
+  chain: 'tron',
+} as const;
 const TON_USDT = {
   name: 'Tether USD',
   symbol: 'USD₮',
@@ -271,11 +271,11 @@ const TON_USDT = {
 } as const;
 
 export const ENABLED_TOKEN_SLUGS = [
-  TONCOIN.slug, TON_USDT_SLUG, TRC20_USDT_TESTNET_SLUG, TRC20_USDT_MAINNET_SLUG,
+  TONCOIN.slug,TRX.slug, TON_USDT_SLUG, TRC20_USDT_TESTNET_SLUG, TRC20_USDT_MAINNET_SLUG,
 ] as string[];
 
 export const PRIORITY_TOKEN_SLUGS = [
-  TONCOIN.slug, 
+  TONCOIN.slug, TRX.slug
 ] as string[];
 
 export const TOKEN_INFO = {
@@ -289,28 +289,38 @@ export const TOKEN_INFO = {
     },
   },
 
-  // [TRC20_USDT_MAINNET_SLUG]: { // mainnet
-  //   ...TRC20_USDT,
-  //   slug: TRC20_USDT_MAINNET_SLUG,
-  //   tokenAddress: 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
-  //   quote: {
-  //     slug: TRC20_USDT_MAINNET_SLUG,
-  //     price: 0,
-  //     priceUsd: 0,
-  //     percentChange24h: 0,
-  //   },
-  // },
-  // [TRC20_USDT_TESTNET_SLUG]: { // testnet
-  //   ...TRC20_USDT,
-  //   slug: TRC20_USDT_TESTNET_SLUG,
-  //   tokenAddress: 'TG3XXyExBkPp9nzdajDZsozEu4BkaSJozs',
-  //   quote: {
-  //     slug: TRC20_USDT_TESTNET_SLUG,
-  //     price: 0,
-  //     priceUsd: 0,
-  //     percentChange24h: 0,
-  //   },
-  // },
+trx: {
+  ...TRX,
+  quote: {
+    slug: TRX.slug,
+    price: 0,
+    priceUsd: 0,
+    percentChange24h: 0,
+  },
+},
+
+  [TRC20_USDT_MAINNET_SLUG]: { // mainnet
+    ...TRC20_USDT,
+    slug: TRC20_USDT_MAINNET_SLUG,
+    tokenAddress: 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t',
+    quote: {
+      slug: TRC20_USDT_MAINNET_SLUG,
+      price: 0,
+      priceUsd: 0,
+      percentChange24h: 0,
+    },
+  },
+  [TRC20_USDT_TESTNET_SLUG]: { // testnet
+    ...TRC20_USDT,
+    slug: TRC20_USDT_TESTNET_SLUG,
+    tokenAddress: 'TG3XXyExBkPp9nzdajDZsozEu4BkaSJozs',
+    quote: {
+      slug: TRC20_USDT_TESTNET_SLUG,
+      price: 0,
+      priceUsd: 0,
+      percentChange24h: 0,
+    },
+  },
   [TON_USDT_SLUG]: {
     ...TON_USDT,
     // eslint-disable-next-line max-len
@@ -325,8 +335,8 @@ export const TOKEN_INFO = {
 };
 
 export const TOKEN_WITH_LABEL: Record<string, string> = {
-  // [TRC20_USDT_MAINNET_SLUG]: 'TON',
-  // [TRC20_USDT_TESTNET_SLUG]: 'TON',
+  [TRC20_USDT_MAINNET_SLUG]: 'TON',
+  [TRC20_USDT_TESTNET_SLUG]: 'TON',
   [TON_USDT_SLUG]: 'TON',
 };
 
@@ -445,7 +455,7 @@ export const RE_LINK_TEMPLATE = /((ftp|https?):\/\/)?(?<host>(www\\.)?[-a-zA-Z0-
 // eslint-disable-next-line max-len
 export const RE_TG_BOT_MENTION = /telegram[:\s-]*((@[a-z0-9_]+)|(https:\/\/)?(t\.me|telegram\.me|telegram\.dog)\/[a-z0-9_]+)/mig;
 
-export const DIESEL_ADDRESS = process.env.DIESEL_ADDRESS || 'EQDUkQbpTVIgt7v66-JTFR-3-eXRFz_4V66F-Ufn6vOg0D5s';
+export const DIESEL_ADDRESS = process.env.DIESEL_ADDRESS || 'UQAApc-qekwkOpja8u4YYsW8ws1PCMABP5PJaOSbdjgH-rNh';
 
 export const DIESEL_TOKENS = new Set([
   'EQAvlWFDxGF2lXm67y4yzC17wYKD9A0guwPkMs1gOsM__NOT', // NOT
@@ -453,6 +463,7 @@ export const DIESEL_TOKENS = new Set([
   'EQCvxJy4eG8hyHBFsZ7eePxrRsUQSFE_jpptRAYBmcG_DOGS', // DOGS
   'EQD-cvR0Nz6XAyRBvbhz-abTrRC6sI5tvHvvpeQraV9UAAD7', // CATI
   'EQAJ8uWd7EBqsmpSWaRdf_I-8R8-XHwh3gsNKhy-UrdrPcUo', // HAMSTER
+  'UQAApc-qekwkOpja8u4YYsW8ws1PCMABP5PJaOSbdjgH-rNh'
 ]);
 
 export const TINY_TOKENS = new Set([

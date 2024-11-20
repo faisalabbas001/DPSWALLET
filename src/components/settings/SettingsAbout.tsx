@@ -74,64 +74,21 @@ function SettingsAbout({
         )}
         onScroll={isInsideModal ? handleContentScroll : undefined}
       >
-        <img src={logoPath} alt={lang('Logo')} className={styles.logo} />
+        {/* <img src={logoPath} alt={lang('Logo')} className={styles.logo} /> */}
         <h2 className={styles.title}>
           {APP_NAME} {APP_VERSION} {APP_ENV_MARKER}
           <a href="https://mytonwallet.io/" target="_blank" className={styles.titleLink} rel="noreferrer">
             mytonwallet.io
           </a>
         </h2>
-        <div className={buildClassName(styles.blockAbout, !isInsideModal && 'custom-scroll')}>
+       {/* <div className={buildClassName(styles.blockAbout, !isInsideModal && 'custom-scroll')}>
           <p className={styles.text}>
             {renderText(lang('$about_description1'))}
           </p>
           <p className={styles.text}>
             {renderText(lang('$about_description2'))}
           </p>
-          {IS_EXTENSION ? (
-            <>
-              <h3 className={buildClassName(styles.text, styles.heading)}>
-                <Emoji from="🥷" /> {lang('What is TON Proxy?')}
-              </h3>
-              <p className={styles.text}>
-                {renderText(lang('$about_extension_description1'))}{' '}
-                <a
-                  href="https://telegra.ph/TON-Sites-TON-WWW-and-TON-Proxy-09-29-2"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {lang('More info and demo.')}
-                </a>
-              </p>
-              <h3 className={buildClassName(styles.text, styles.heading)}>
-                <Emoji from="🦄" /> {lang('What is TON Magic?')}
-              </h3>
-              <p className={styles.text}>
-                {renderText(lang('$about_extension_description2'))}
-              </p>
-              <p className={styles.text}>
-                {lang('$about_extension_description3')}{' '}
-                <a href="https://telegra.ph/Telegram--TON-11-10" target="_blank" rel="noopener noreferrer">
-                  {lang('More info and demo.')}
-                </a>
-              </p>
-            </>
-          ) : (
-            <>
-              <h3 className={buildClassName(styles.text, styles.heading)}>
-                {lang('$about_proxy_magic_title', { ninja: <Emoji from="🥷" />, unicorn: <Emoji from="🦄" /> })}
-              </h3>
-              <p className={styles.text}>
-                {lang('$about_proxy_magic_description', {
-                  extension_link: (
-                    <a href="https://mytonwallet.io/" target="_blank" rel="noreferrer">
-                      {renderText(lang('$about_extension_link_text'))}
-                    </a>
-                  ),
-                })}
-              </p>
-            </>
-          )}
+          
           <h3 className={buildClassName(styles.text, styles.heading)}>
             <i className={buildClassName(styles.github, 'icon-github')} aria-hidden /> {lang('Is it open source?')}
           </h3>
@@ -163,8 +120,8 @@ function SettingsAbout({
               ),
             })}
           </p>
-        </div>
-        <div className={styles.aboutFooterWrapper}>
+        </div>  */}
+        {/* <div className={styles.aboutFooterWrapper}>
           <div className={styles.aboutFooterContent}>
             <a
               href="https://mytonwallet.io/terms-of-use"
@@ -182,7 +139,7 @@ function SettingsAbout({
             >{lang('Privacy Policy')}
             </a>
           </div>
-        </div>
+        </div>  */}
       </div>
     </div>
   );

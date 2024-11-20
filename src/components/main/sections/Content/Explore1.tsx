@@ -68,31 +68,18 @@ function Explore({
       country: formData.country,
       mobile_number: formData.mobileNumber,
       email: formData.email,
-      user: 4, // Static user ID
+      user: "", // Static user ID
     };
-
-    try {
-      const response = await fetch('https://softdev.pythonanywhere.com/api/user-profile/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (response.ok) {
-        const result = await response.json();
-        setSuccessMessage('Profile created successfully!');
-        console.log('Response:', result);
-      } else {
-        const errorData = await response.json();
-        setErrors(errorData);
-        console.error('Error:', errorData);
-      }
-    } catch (error) {
-      console.error('Network error:', error);
-      setErrors({ general: 'Network error occurred. Please try again later.' });
+    
+    if(payload){
+      localStorage.setItem("FormData", JSON.stringify(payload));
+      alert("Data Submitted")
+      location.reload()
+    }else{
+      alert("Error not submit")
     }
+
+    
   };
 
   useEffect(() => {
@@ -122,6 +109,7 @@ function Explore({
             placeholder="Full Name"
             value={formData.fullName}
             onChange={handleChange}
+            required
             className={styles1.input}
           />
           <input
@@ -130,12 +118,14 @@ function Explore({
             placeholder="Father's Name"
             value={formData.fatherName}
             onChange={handleChange}
+            required
             className={styles1.input}
           />
           <input
             type="text"
             name="cnic"
             placeholder="CNIC Number"
+            required
             value={formData.cnic}
             onChange={handleChange}
             className={`${styles1.input} ${errors.cnic ? styles1.error : ''}`}
@@ -144,6 +134,7 @@ function Explore({
           <textarea
             name="address"
             placeholder="Address"
+            required
             value={formData.address}
             onChange={handleChange}
             className={styles1.textarea}
@@ -153,6 +144,7 @@ function Explore({
             name="country"
             placeholder="Country"
             value={formData.country}
+            required
             onChange={handleChange}
             className={styles1.input}
           />
@@ -161,6 +153,7 @@ function Explore({
             name="mobileNumber"
             placeholder="Mobile Number"
             value={formData.mobileNumber}
+            required
             onChange={handleChange}
             className={`${styles1.input} ${errors.mobileNumber ? styles1.error : ''}`}
           />
@@ -169,6 +162,7 @@ function Explore({
             type="email"
             name="email"
             placeholder="Email Address"
+            required
             value={formData.email}
             onChange={handleChange}
             className={`${styles1.input} ${errors.email ? styles1.error : ''}`}

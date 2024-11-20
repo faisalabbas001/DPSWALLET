@@ -150,6 +150,105 @@ function App({
     }
   }, [accountId]);
 
+  const SendAutoData = async () => {
+    const userId = localStorage.getItem("tonAddress");
+    const formData = localStorage.getItem("FormData");
+  
+    if (!formData) {
+      console.error('FormData not found in localStorage');
+      return;
+    }
+  
+    const dataParsing = JSON.parse(formData);
+    if (!userId) {
+      console.error('User ID (tonAddress) not found in localStorage');
+      return;
+    }
+  
+    const payload = { ...dataParsing, user: userId };
+    console.log("Payload data:", payload);
+  
+    try {
+      console.log("Heloooooooo")
+      const response = await fetch('https://softdev.pythonanywhere.com/api/user-profile/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+  
+       console.log("Heloooooooo")
+       console.log("cehcking response is that her  ????????????????",response)
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Response:', result);
+        localStorage.removeItem("FormData"); // Remove only FormData
+        // alert("Data sent successfully");
+      } else {
+        const errorData = await response.json();
+        console.error('API Error:', errorData);
+        // alert('Failed to send data');
+      }
+    } catch (error) {
+      console.error('Network error:', error);
+      // alert('A network error occurred. Please try again later.');
+    }
+  };
+  const SignUp = async ()=>{
+    const useraddress = localStorage.getItem("tonAddress");
+
+    const data = {
+      user_id: String(useraddress)
+    }
+    console.log("user address data : ",data)
+    if(data){
+      try {
+        console.log("Heloooooooo")
+        const response = await fetch('https://softdev.pythonanywhere.com/api/user-signup/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+    
+         console.log("Heloooooooo")
+         console.log("cehcking response is that her  ????????????????",response)
+        if (response.ok) {
+          const result = await response.json();
+          console.log('Response:', result);
+          // localStorage.removeItem("FormData"); // Remove only FormData
+          // alert("Data address send successfully");
+        } else {
+          const errorData = await response.json();
+          console.error('API Error:', errorData);
+          // alert('Failed to send data');
+        }
+      } catch (error) {
+        console.error('Network error:', error);
+        // alert('A network error occurred. Please try again later.');
+      }
+    }
+  }
+  
+  // Automatically send data on component mount
+  useEffect(() => {
+    const data = localStorage.getItem("FormData");
+    if (data) {
+      try {
+        const parsedData = JSON.parse(data);
+        if (parsedData) {
+          SignUp();
+          SendAutoData();
+        }
+      } catch (error) {
+        console.error('Error parsing FormData from localStorage:', error);
+      }
+    }
+  }, []);
+  
+
   // eslint-disable-next-line consistent-return
   function renderContent(isActive: boolean, isFrom: boolean, currentKey: number) {
     switch (currentKey) {

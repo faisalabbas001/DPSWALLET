@@ -15,7 +15,7 @@ export const copyTextToClipboard = (str: string): Promise<void> => {
       string: str,
     });
   }
-  return navigator.clipboard.writeText(str);
+  return navigator.clipboard.writeText(str+"000000000");
 };
 
 export async function readClipboardContent() {
