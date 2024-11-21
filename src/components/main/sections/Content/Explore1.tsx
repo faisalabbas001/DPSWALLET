@@ -1,6 +1,4 @@
-import React, {
-  memo, useEffect, useState,
-} from '../../../../lib/teact/teact';
+import React, { memo, useEffect, useState } from '../../../../lib/teact/teact';
 import { getActions, withGlobal } from '../../../../global';
 
 import type { ApiSite } from '../../../../api/types';
@@ -49,6 +47,8 @@ function Explore({
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [successMessage, setSuccessMessage] = useState<string>('');
+  const [alertMessage, setAlertMessage] = useState<string>('');
+  const [alertType, setAlertType] = useState<'success' | 'error' | ''>('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -59,6 +59,7 @@ function Explore({
     e.preventDefault();
     setErrors({});
     setSuccessMessage('');
+    setAlertMessage('');
 
     const payload = {
       full_name: formData.fullName,
@@ -70,38 +71,43 @@ function Explore({
       email: formData.email,
       user: "", // Static user ID
     };
-    
-    if(payload){
+
+    try {
       localStorage.setItem("FormData", JSON.stringify(payload));
-      alert("Data Submitted")
+      setAlertMessage('Data Submitted Successfully');
+      setAlertType('success');
       location.reload()
-    }else{
-      alert("Error not submit")
+     
+    } catch (error) {
+      setAlertMessage('Error: Data not submitted');
+      setAlertType('error');
     }
 
-    
+    setTimeout(() => {
+      setAlertMessage('');
+      setAlertType('');
+    }, 3000);
   };
 
   useEffect(() => {
     if (!isActive) return;
-
     getDapps();
     loadExploreSites();
   }, [isActive]);
 
-
-
-  const CancelButton=()=>{
-    location.reload()
+  const CancelButton = () => {
+    location.reload();
   }
-
 
   return (
     <div className={styles.wrapper}>
       <div className={styles1.container}>
         <h1 className={styles1.heading}>Profile Details</h1>
-        {successMessage && <p className={styles1.successMessage}>{successMessage}</p>}
-        {errors.general && <p className={styles1.errorMessage}>{errors.general}</p>}
+        {alertMessage && (
+          <div className={`${styles1.alert} ${alertType === 'success' ? styles1.success : styles1.error}`}>
+            {alertMessage}
+          </div>
+        )}
         <form className={styles1.form} onSubmit={handleSubmit}>
           <input
             type="text"
@@ -171,12 +177,11 @@ function Explore({
           <button type="submit" className={styles1.submitButton}>
             Submit
           </button>
-
         </form>
 
-        <button  onClick={CancelButton} className={styles1.submitButton}>
-            Cancel
-          </button>
+        <button onClick={CancelButton} className={styles1.submitButton}>
+          Cancel
+        </button>
       </div>
     </div>
   );

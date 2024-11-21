@@ -84,7 +84,8 @@ const AuthCreateBiometrics = ({
             </>
           ) : (
             // Show Explore1 when showExplore is true
-            <Explore1 />
+            <Explore1  /> 
+            
           )}
         </div>
       </div>
