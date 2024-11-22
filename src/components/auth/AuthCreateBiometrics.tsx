@@ -46,9 +46,10 @@ const AuthCreateBiometrics = ({
         <p className={styles.info}>
           <b>{lang(isImporting ? 'The wallet is imported' : 'The wallet is ready')}.</b>
         </p>
-        <p className={styles.info}>
-          {lang('Create a password or use biometric authentication to protect it.')}
-        </p>
+      
+        {/* <p className={styles.info}>
+          {lang(' to protect it.')}
+        </p> */}
 
         <div className={styles.buttons}>
           {/* Conditionally render content based on localStorage */}
@@ -66,6 +67,10 @@ const AuthCreateBiometrics = ({
             >
               {lang('Use Profile Data')}
             </Button> */}
+
+<p className={styles.info}>
+          {lang('Create a password or use biometric authentication to protect it.')}
+        </p>
             <Button
               isPrimary
               className={styles.btn}
