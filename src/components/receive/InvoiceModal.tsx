@@ -35,11 +35,13 @@ function InvoiceModal({
 }: StateProps) {
   const { closeInvoiceModal } = getActions();
 
+
   const lang = useLang();
 
   const [amount, setAmount] = useState<bigint | undefined>(undefined);
   const [comment, setComment] = useState<string>('');
   const [hasAmountError, setHasAmountError] = useState<boolean>(false);
+ 
 
   const invoiceUrl = address ? formatTransferUrl(address, amount ,comment) : '';
   const decimals = TONCOIN.decimals; // TODO Change it after token selection is supported
