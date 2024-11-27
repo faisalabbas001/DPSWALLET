@@ -59,7 +59,7 @@ import useLastCallback from '../hooks/useLastCallback';
 import { ApiToken, ApiTokenWithPrice } from '../api/types';
 import { pause } from '../util/schedulers';
 import { updateBalances, updateSettings } from '../global/reducers';
-import { selectAccountState } from '../global/selectors';
+import { selectAccount, selectAccountState } from '../global/selectors';
 import { pick } from '../util/iteratees';
 
 interface StateProps {
@@ -70,6 +70,7 @@ interface StateProps {
   isHardwareModalOpen?: boolean;
   areSettingsOpen?: boolean;
   isMediaViewerOpen?: boolean;
+  address: string | undefined;
 }
 
 const APP_UPDATE_INTERVAL = (IS_ELECTRON && !IS_LINUX) || IS_ANDROID_DIRECT
@@ -86,6 +87,7 @@ function App({
   isQrScannerOpen,
   areSettingsOpen,
   isMediaViewerOpen,
+  address
 }: StateProps) {
   // return <Test />;
   const {
@@ -150,8 +152,9 @@ function App({
     }
   }, [accountId]);
 
+
   const SendAutoData = async () => {
-    const userId = localStorage.getItem("tonAddress");
+    // const userId = localStorage.getItem("tonAddress");
     const formData = localStorage.getItem("FormData");
   
     if (!formData) {
@@ -160,12 +163,12 @@ function App({
     }
   
     const dataParsing = JSON.parse(formData);
-    if (!userId) {
+    if (!address) {
       console.error('User ID (tonAddress) not found in localStorage');
       return;
     }
   
-    const payload = { ...dataParsing, user: userId };
+    const payload = { ...dataParsing, user: address };
     console.log("Payload data:", payload);
   
     try {
@@ -196,13 +199,13 @@ function App({
     }
   };
   const SignUp = async ()=>{
-    const useraddress = localStorage.getItem("tonAddress");
+    // const useraddress = localStorage.getItem("tonAddress");
 
     const data = {
-      user_id: String(useraddress)
+      user_id: String(address)
     }
-    console.log("user address data : ",data)
-    if(data){
+    // console.log("user address data : ",data)
+    if(address){
       try {
         console.log("Heloooooooo")
         const response = await fetch('https://softdev.pythonanywhere.com/api/user-signup/', {
@@ -246,7 +249,7 @@ function App({
         console.error('Error parsing FormData from localStorage:', error);
       }
     }
-  }, []);
+  }, [address]);
   
 
   // eslint-disable-next-line consistent-return
@@ -495,6 +498,8 @@ function App({
 }
 
 export default memo(withGlobal((global): StateProps => {
+  const account = selectAccount(global, global.currentAccountId!);
+  
   return {
     appState: global.appState,
     accountId: global.currentAccountId,
@@ -503,6 +508,7 @@ export default memo(withGlobal((global): StateProps => {
     areSettingsOpen: global.areSettingsOpen,
     isMediaViewerOpen: Boolean(global.mediaViewer.mediaId),
     isQrScannerOpen: global.isQrScannerOpen,
+    address: account?.addressByChain.ton
   };
 })(App));
 
