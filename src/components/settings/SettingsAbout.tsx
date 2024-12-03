@@ -74,7 +74,7 @@ function SettingsAbout({
         )}
         onScroll={isInsideModal ? handleContentScroll : undefined}
       >
-        {/* <img src={logoPath} alt={lang('Logo')} className={styles.logo} /> */}
+        <img src={logoPath} alt={lang('Logo')} className={styles.logo} />
         <h2 className={styles.title}>
           {APP_NAME} {APP_VERSION} {APP_ENV_MARKER}
           <a href="https://mytonwallet.io/" target="_blank" className={styles.titleLink} rel="noreferrer">

@@ -99,9 +99,10 @@ function Explore({
     loadExploreSites();
   }, [isActive]);
 
-  const CancelButton = () => {
-    location.reload();
-  };
+  // const CancelButton = () => {
+  //   setShowForm(false); // Hide the form
+  //   setShowBiometrics(true); 
+  // };
 
   return (
     <div className={styles.wrapper}>
@@ -188,9 +189,9 @@ function Explore({
           </form>
 
           {/* Cancel button */}
-          <button onClick={CancelButton} className={styles1.submitButton}>
+          {/* <button onClick={CancelButton} className={styles1.submitButton}>
             Cancel
-          </button>
+          </button> */}
         </div>
       ) : (
         // If the form is hidden, show the biometrics component

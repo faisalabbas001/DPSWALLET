@@ -17,8 +17,9 @@ $tab-1-height: 348;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 
   width: 100%;
+  background-color: #D3D3D3;
 
-  background: var(--color-background-first-disabled);
+  // background: var(--color-background-first-disabled);
   border-radius: var(--border-radius-default) var(--border-radius-default) 0 0;
 }
 
@@ -91,8 +92,10 @@ $tab-1-height: 348;
     pointer-events: none;
 
     font-weight: 700;
+    background-color: #1F4529;
+   
 
-    background: var(--color-background-first);
+    // background: var(--color-background-first);
 
     &::before,
     &::after,
@@ -100,15 +103,15 @@ $tab-1-height: 348;
     .tabDecoration::after {
       content: "";
 
-      position: absolute;
-      bottom: 0;
+      // position: relative;
+      // bottom: 0;
 
-      display: block;
+      // display: block;
 
       width: var(--border-radius-default);
       height: var(--border-radius-default);
 
-      background: inherit;
+      // background: inherit;
     }
 
     &::before,

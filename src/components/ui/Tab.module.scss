@@ -10,7 +10,7 @@
   padding: 0.4375rem 0.25rem;
 
   font-weight: 500;
-  color: var(--color-black);
+  color: white;
 
   background: none;
   border: none;
@@ -32,7 +32,7 @@
   &_active {
     cursor: default;
 
-    color: var(--color-blue);
+    color: black;
 
     i {
       opacity: 1 !important;

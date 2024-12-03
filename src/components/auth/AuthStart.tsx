@@ -17,9 +17,11 @@ import Button from '../ui/Button';
 
 import styles from './Auth.module.scss';
 
-import logoDarkPath from '../../assets/logoDark.svg';
+import logoDarkPath from "../../assets/logoDark.svg";
 import logoLightPath from '../../assets/logoLight.svg';
 
+// import logoDarkPath from "../../assets/logoDark.jpg"
+// import {logoDarkPath} from "../../assets/logoDark.jpg";
 interface StateProps {
   hasAccounts?: boolean;
   isLoading?: boolean;
@@ -50,12 +52,12 @@ function AuthStart({ hasAccounts, isLoading, theme }: StateProps) {
         </Button>
       )}
 
-      {/* <img
+      <img
         src={logoPath}
         alt={APP_NAME}
         className={buildClassName(styles.logo, transitionClassNames)}
         onLoad={markLogoReady}
-      /> */}
+      />
       <div className={styles.appName}>{APP_NAME}</div>
       <div className={styles.info}>
         {renderText(lang('$auth_intro'))}
